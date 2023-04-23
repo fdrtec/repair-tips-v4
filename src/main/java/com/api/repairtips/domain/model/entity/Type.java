@@ -3,6 +3,7 @@ package com.api.repairtips.domain.model.entity;
 import java.io.Serializable;
 import java.util.UUID;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,9 +18,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(of = "id")
+@EqualsAndHashCode(of = "id", callSuper = false)
 @Entity
-public class Type implements Serializable {
+public class Type extends Auditable implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -27,7 +28,11 @@ public class Type implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
+    @Column(nullable = false, unique = true)
     private String name;
+
+    // @Column(nullable = true, columnDefinition = "TIMESTAMP")
+    // private LocalDateTime exampleDateColumnDefinition;
     
 }
 
