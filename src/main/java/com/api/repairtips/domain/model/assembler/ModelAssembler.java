@@ -18,14 +18,14 @@ public abstract class ModelAssembler<T,S> {
 		return mapper.map(dto, entityType);
 	}
 	
-	public T toDto(S model) {
+	public T toDTO(S model) {
 	    Type dtoType = ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
 		 return mapper.map(model, dtoType);
 	}
 
    public List<T> toCollectionDTO(List<S> models) {
        return models.stream()
-       .map((S model) -> this.toDto(model))
+       .map((S model) -> this.toDTO(model))
        .collect(Collectors.toList());
    }
 

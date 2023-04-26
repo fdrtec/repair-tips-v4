@@ -1,6 +1,7 @@
 package com.api.repairtips.domain.model.dto;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import jakarta.validation.constraints.NotBlank;
@@ -19,4 +20,8 @@ public class TypeDTO implements Serializable {
 
     @NotBlank
     private String name;    
+    
+    private LocalDateTime createdDate;
+    
+    private LocalDateTime lastModifiedDate;   
 }

@@ -19,7 +19,7 @@ import lombok.Setter;
 public abstract class Auditable {
 
     @CreatedDate
-    @Column(nullable = false)
+    @Column
     protected LocalDateTime createdDate;
 
     @LastModifiedDate
