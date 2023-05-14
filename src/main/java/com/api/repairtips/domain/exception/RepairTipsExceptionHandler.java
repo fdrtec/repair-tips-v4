@@ -42,5 +42,14 @@ public class RepairTipsExceptionHandler extends ResponseEntityExceptionHandler {
         .build();
 
         return ResponseEntity.status(httpStatus).body(apiError);        
-    }    
+    }
+    
+    @ExceptionHandler(BusinessException.class)
+    public ResponseEntity<Object> handleBusinessException(BusinessException exception) {
+        return ResponseEntity.status(500).body(exception);
+        // else if(exception instanceof EntityExistsException){
+            // super.handleExceptionInternal(ex, apiError, headers, status, request)
+        // }
+    }
 }
+

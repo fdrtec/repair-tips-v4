@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,7 @@ public class TypeDTO implements Serializable {
     private UUID id;
 
     @NotBlank
+    @Size(max = 255)
     private String name;    
     
     private LocalDateTime createdDate;

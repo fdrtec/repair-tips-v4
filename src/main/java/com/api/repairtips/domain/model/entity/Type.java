@@ -1,6 +1,7 @@
 package com.api.repairtips.domain.model.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.UUID;
 
 import jakarta.persistence.Column;
@@ -33,6 +34,13 @@ public class Type extends Auditable implements Serializable {
 
     // @Column(nullable = true, columnDefinition = "TIMESTAMP")
     // private LocalDateTime exampleDateColumnDefinition;
+
+    // @Enumerated(EnumType.STRING)
+    // @Column(nullable = false, length = 20 )
+    // private Gender gender;
+
+    // @Column(name = "total", precision = 20, scale = 2)
+    // private BigDecimal total;
     
 }
 
