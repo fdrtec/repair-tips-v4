@@ -9,6 +9,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -41,7 +44,14 @@ public class Type extends Auditable implements Serializable {
 
     // @Column(name = "total", precision = 20, scale = 2)
     // private BigDecimal total;
+
+    // @OneToMany(mappedBy = "entidade onde fica o ManyToOne")
+    // private List<Item> itens;
     
+    //Não precisa declarar carregamento Lazy porque já default  
+    // @ManyToOne (cascade = { CascadeType.MERGE })
+    // @JoinColumn(name = "entidade_id da descrição abaixo")
+    // private Entidade entidade;
 }
 
 
