@@ -1,7 +1,5 @@
 package com.api.repairtips.domain.model.entity;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.UUID;
 
 import jakarta.persistence.Column;
@@ -9,9 +7,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,18 +17,22 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(of = "id", callSuper = false)
+@EqualsAndHashCode(of = {"id", "name"}, callSuper = false)
 @Entity
-public class Type extends Auditable implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class Type extends Auditable implements Comparable<Type> {    
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
     @Column(nullable = false, unique = true)
-    private String name;
+    private String name;    
+    
+    @Override
+    public int compareTo(Type other) {
+        return name.compareTo(other.getName());
+    }   
+    
 
     // @Column(nullable = true, columnDefinition = "TIMESTAMP")
     // private LocalDateTime exampleDateColumnDefinition;

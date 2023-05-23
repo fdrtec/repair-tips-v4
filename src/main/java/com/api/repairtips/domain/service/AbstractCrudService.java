@@ -12,11 +12,12 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public abstract class AbstractCrudService<D, E, R extends JpaRepository<E, UUID>> extends ModelAssembler<D,E> implements IcrudService<D, E>{
+abstract class AbstractCrudService<D, E, R extends JpaRepository<E, UUID>> extends ModelAssembler<D,E> implements IcrudService<D>{
 
     protected final R repository;
 
-    protected List<D> getAll(){
+    @Override
+    public List<D> getAll(){
         return this.toCollectionDTO(repository.findAll());        
     }
     

@@ -10,12 +10,12 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-public abstract class CrudController<D, S extends IcrudService<D>> {
+abstract class AbstractCrudController<D, S extends IcrudService<D>> {
     
     protected final S service;
 
-    protected List<D> findAll(){
-        return service.findAll();
+    protected List<D> getAll(){
+        return service.getAll();
 
     }
 
