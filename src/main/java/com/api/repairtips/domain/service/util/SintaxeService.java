@@ -43,5 +43,18 @@ public class SintaxeService {
         names.add("Andreia");
         names.size();
     }
+
+    /*
+     * toMany = (fetch = FetchType.Lazy)
+     * toOne = (fetch = FetchType.Eager)
+     * 
+     * resolução do N+1
+     * @Query("from Restaurante r join fetch r.cozinha left join fetch r.formasPagamento")
+     * List<Restaurante> getAll()
+     * o fetch para lazy funciona automatico só precisa o join(mas é bom para ficar bem definido o motivo),
+     * mas para eager precisa colocar o fetch, e caso não tenha uma "forma de pagamento"
+     * precisa usar left join 
+     * 
+    */
     
 }

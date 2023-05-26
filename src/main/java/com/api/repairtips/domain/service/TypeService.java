@@ -1,7 +1,5 @@
 package com.api.repairtips.domain.service;
 
-import java.lang.annotation.RetentionPolicy;
-import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +11,6 @@ import com.api.repairtips.domain.exception.BusinessException;
 import com.api.repairtips.domain.model.assembler.ModelAssembler;
 import com.api.repairtips.domain.model.dto.TypeDTO;
 import com.api.repairtips.domain.model.entity.Type;
-import com.api.repairtips.domain.model.enumeration.StateResponseEnum;
 import com.api.repairtips.domain.repository.TypeRepository;
 
 import jakarta.persistence.EntityExistsException;
