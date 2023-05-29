@@ -14,50 +14,55 @@ import com.api.repairtips.domain.model.entity.Type;
 import com.api.repairtips.domain.repository.TypeRepository;
 
 import jakarta.persistence.EntityExistsException;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class TypeService extends ModelAssembler<TypeDTO, Type> {
+    
+    private final TypeRepository repository;
 
-    @Autowired
-    private TypeRepository repository;
-
-    public TypeDTO getById(UUID id) {
-        Type type = repository.findById(id)
-        .orElseThrow(() -> new NotFoundException("ENTITY_NOT_FOUND"));
-        return this.toDTO(type);        
+    public TypeDTO getById(UUID id) {        
+        return this.toDTO(findById(id));
     }
+
+    private Type findById(UUID id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new BusinessException(
+                        new NotFoundException("ENTITY_NOT_FOUND")));
+    }
+
     @Transactional
-    public TypeDTO create(TypeDTO typeDTO){
-        verifyIfExists(typeDTO.getName());
+    public TypeDTO create(TypeDTO typeDTO) {
+        verifyConflictExistence(typeDTO.getName());
         Type type = repository.saveAndFlush(this.toEntity(typeDTO));
         return this.toDTO(type);
     }
 
-    private void verifyIfExists(String typeName) {        
+    private void verifyConflictExistence(String typeName) {
         repository.findByName(typeName)
-        .ifPresent((type) -> { 
-            throw new BusinessException(new EntityExistsException("ENTITY_ALREADY_EXISTS"));
-        });
+                .ifPresent((type) -> {
+                    throw new BusinessException(new EntityExistsException("ENTITY_ALREADY_EXISTS"));
+                });
     }
 
     @Transactional
-    public void deleteById(UUID id){         
-            existsTypeById(id);           
-            repository.deleteById(id);
+    public void deleteById(UUID id) {
+        existsById(id);
+        repository.deleteById(id);
             // tratamento para descarregar o banco dentro do try - algaworks
-            repository.flush();       
+        repository.flush();
     }
 
     @Transactional
     public void update(TypeDTO typeDTO) {
-        existsTypeById(typeDTO.getId());
-        repository.saveAndFlush(this.toEntity(typeDTO));        
-    }
-    
-    private Type existsTypeById(UUID id){
-        return repository.findById(id)
-        .orElseThrow(() -> new BusinessException(
-            new NotFoundException("ENTITY_NOT_FOUND")
-        ));
+        existsById(typeDTO.getId());
+        repository.saveAndFlush(this.toEntity(typeDTO));
+    }    
+
+    private void existsById(UUID id) {
+        if (!repository.existsById(id)) {
+            throw new NotFoundException("ENTITY_NOT_FOUND");
+        }
     }
 }
