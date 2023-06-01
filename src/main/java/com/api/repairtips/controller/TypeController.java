@@ -1,8 +1,8 @@
 package com.api.repairtips.controller;
 
+import java.util.List;
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,26 +21,27 @@ import com.api.repairtips.domain.service.TypeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/types")
+@RequiredArgsConstructor
 public class TypeController implements TypeControllerDocs {
+
+    private final TypeService typeService;
 
     @Operation(summary = "Get type list")
     @ApiResponse(responseCode = "200", description = "Type list found")
     @GetMapping
-    public String getTypes() {
-        return "Types";
+    public List<TypeDTO> getTypes() {
+        return typeService.findAll();
     }
-
-    @Autowired
-    private TypeService typeService;
-
+    
     @Operation(summary = "Get a type by its id")
     @ApiResponse(responseCode = "200", description = "Type found")
     @GetMapping({"id"})
-    public TypeDTO getById(@PathVariable UUID id){
-        return typeService.getById(id);
+    public TypeDTO findById(@PathVariable UUID id){
+        return typeService.findById(id);
     }
 
     
@@ -58,7 +59,7 @@ public class TypeController implements TypeControllerDocs {
 
     @PutMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@RequestBody TypeDTO typeDTO){
+    public void update(@RequestBody @Valid TypeDTO typeDTO){
         typeService.update(typeDTO);
     }  
 }
