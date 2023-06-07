@@ -20,20 +20,19 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class TypeService extends ModelAssembler<TypeDTO, Type> {
 
     private final TypeRepository repository;
-
-    @Transactional(readOnly = true)
+    
     public List<TypeDTO> findAll() {
         return this.toCollectionDTO(repository.findAll());
     }
-
-    @Transactional(readOnly = true)
+    
     public TypeDTO findById(UUID id) {
-        return this.toDTO(repository.findById(id)
-            .orElseThrow(() -> new BusinessException(
-                new NotFoundException("ENTITY_NOT_FOUND"))));
+        return this.toDTO(repository.findById(id).get());
+            // .orElseThrow(() -> new BusinessException(
+            //     new NotFoundException("ENTITY_NOT_FOUND"))));
     }
 
     @Transactional
@@ -52,8 +51,10 @@ public class TypeService extends ModelAssembler<TypeDTO, Type> {
 
     @Transactional
     public void deleteById(UUID id) {
-        existsById(id);
+        //verificar se é preciso essa validação abstractCrud
+        // existsById(id);
         repository.deleteById(id);
+        
         // tratamento para descarregar o banco dentro do try - algaworks
         repository.flush();
     }

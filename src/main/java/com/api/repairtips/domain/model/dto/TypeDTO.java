@@ -23,7 +23,7 @@ public class TypeDTO implements Serializable {
     @Size(max = 255)
     private String name;    
     
-    private LocalDateTime createdDate;
+    // private LocalDateTime createdDate;
     
-    private LocalDateTime lastModifiedDate;   
+    // private LocalDateTime lastModifiedDate;   
 }

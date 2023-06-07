@@ -39,7 +39,7 @@ public class TypeController implements TypeControllerDocs {
     
     @Operation(summary = "Get a type by its id")
     @ApiResponse(responseCode = "200", description = "Type found")
-    @GetMapping({"id"})
+    @GetMapping("{id}")
     public TypeDTO findById(@PathVariable UUID id){
         return typeService.findById(id);
     }

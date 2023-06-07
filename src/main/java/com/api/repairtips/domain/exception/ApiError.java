@@ -14,14 +14,12 @@ import lombok.Getter;
 @Builder
 @Getter
 public class ApiError {
-    
-    private Integer code;
-
-    private String status;
-
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/mm/yyyy hh:mm")
+        
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy hh:mm")
     private LocalDateTime timestamp;
-
+    
+    private Integer status;   
+    
     private String message;
 
     private List<String> errors;

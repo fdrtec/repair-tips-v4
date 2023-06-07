@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,14 +19,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id", "name"}, callSuper = false)
+@Table(name = "tb_type")
 @Entity
-public class Type extends Auditable implements Comparable<Type> {    
+public class Type implements Comparable<Type> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "type_id")
     private UUID id;
 
-    @Column(nullable = false, unique = true)
+    @Column(name = "type_name", nullable = false, unique = true)
     private String name;    
     
     @Override
