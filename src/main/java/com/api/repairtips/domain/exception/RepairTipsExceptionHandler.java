@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -14,9 +13,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @ControllerAdvice
+@ResponseBody
 public class RepairTipsExceptionHandler extends ResponseEntityExceptionHandler {
-
-    @ResponseBody
+    
     @ResponseStatus(HttpStatus.NOT_FOUND)    
     @ExceptionHandler(NoSuchElementException.class)
     public ApiError handleNoSuchElementException( NoSuchElementException exception) {
@@ -51,12 +50,12 @@ public class RepairTipsExceptionHandler extends ResponseEntityExceptionHandler {
         .build();                
     }
     
-    @ExceptionHandler(BusinessException.class)
-    public ResponseEntity<Object> handleBusinessException(BusinessException exception) {
-        return ResponseEntity.status(500).body(exception);
-        // else if(exception instanceof EntityExistsException){
-            // super.handleExceptionInternal(ex, apiError, headers, status, request)
-        // }
-    }
+    // @ExceptionHandler(BusinessException.class)
+    // public ResponseEntity<Object> handleBusinessException(BusinessException exception) {
+    //     return ResponseEntity.status(500).body(exception);
+    //     // else if(exception instanceof EntityExistsException){
+    //         // super.handleExceptionInternal(ex, apiError, headers, status, request)
+    //     // }
+    // }
 }
 
