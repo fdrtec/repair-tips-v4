@@ -55,8 +55,8 @@ public class TypeService extends ModelAssembler<TypeDTO, Type> {
     @Transactional
     public void deleteById(UUID id) {
         // verificar se é preciso essa validação abstractCrud
-        // existsById(id);
-        repository.deleteById(id);
+        // existsById(id);        
+        repository.delete(repository.findById(id).get());        
 
         // tratamento para descarregar o banco dentro do try - algaworks
         repository.flush();

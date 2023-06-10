@@ -1,5 +1,7 @@
 package com.api.repairtips.domain.exception;
 
+import static org.springframework.http.HttpStatus.NOT_FOUND;
+
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
@@ -16,12 +18,10 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ResponseBody
 public class RepairTipsExceptionHandler extends ResponseEntityExceptionHandler {
     
-    @ResponseStatus(HttpStatus.NOT_FOUND)    
+    @ResponseStatus(NOT_FOUND)    
     @ExceptionHandler(NoSuchElementException.class)
     public ApiError handleNoSuchElementException( NoSuchElementException exception) {
-        return buildExceptionResponse(
-            HttpStatus.NOT_FOUND,
-            exception.getMessage(),
+        return buildExceptionResponse( NOT_FOUND, exception.getMessage(),
             Collections.singletonList(exception.getClass().getName()));
     }
 
