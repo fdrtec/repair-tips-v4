@@ -18,7 +18,7 @@ import com.api.repairtips.domain.exception.ApiError;
 
 @ControllerAdvice
 @ResponseBody
-public class RepairTipsExceptionHandler extends ResponseEntityExceptionHandler {
+public class ApplicationControllerAdvice extends ResponseEntityExceptionHandler {
     
     @ResponseStatus(NOT_FOUND)    
     @ExceptionHandler(NoSuchElementException.class)
