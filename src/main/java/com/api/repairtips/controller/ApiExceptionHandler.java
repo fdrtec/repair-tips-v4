@@ -8,17 +8,15 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.api.repairtips.domain.exception.ApiError;
 
-@ControllerAdvice
-@ResponseBody
-public class ApplicationControllerAdvice extends ResponseEntityExceptionHandler {
+@RestControllerAdvice
+public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     
     @ResponseStatus(NOT_FOUND)    
     @ExceptionHandler(NoSuchElementException.class)
