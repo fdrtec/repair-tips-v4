@@ -21,9 +21,13 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     @ResponseStatus(NOT_FOUND)    
     @ExceptionHandler(NoSuchElementException.class)
     public ApiError handleNoSuchElementException( NoSuchElementException exception) {
+        // Throwable rootCause = ExceptionUtils.getRootCause(exception);
         return buildExceptionResponse( NOT_FOUND, exception.getMessage(),
             Collections.singletonList(exception.getClass().getName()));
     }
+
+    //Para @Valid do beanValidation
+    // MethodArgumentNotValidException
 
     // @ExceptionHandler(EntityNotFoundException.class)
     // public ResponseEntity<Object> handleEntityNotFoundException( EntityNotFoundException exception) {
