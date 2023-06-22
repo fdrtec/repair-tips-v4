@@ -1,8 +1,11 @@
 package com.api.repairtips.domain.model.dto;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.UUID;
+
+// import org.hibernate.validator.constraints.Range;
+
+// import org.hibernate.validator.constraints.br.CPF;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -21,9 +24,20 @@ public class TypeDTO implements Serializable {
 
     @NotBlank
     @Size(max = 255)
-    private String name;    
+    private String name; 
+    
+    // @CPF
+    // private String cpf;
+
+    // @Range(min = 10, max = 20)
+    // private Integer limite;
     
     // private LocalDateTime createdDate;
     
-    // private LocalDateTime lastModifiedDate;   
+    // private LocalDateTime lastModifiedDate;    
+    
+    // @NotEmpty
+    // @DecimalMin("0")
+    // @PositiveOrZero
+    // private BigDecimal taxaFrete;
 }
