@@ -29,7 +29,8 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
                 Collections.singletonList(exception.getClass().getName()));
     }
 
-    //para fazer testes com atributos com @Valid
+    // para fazer testes com atributos com @Valid - rever algaworks 9.11
+    // messages.properties
     @ResponseStatus(BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ApiError handleMethodArgumentNotValidException(MethodArgumentNotValidException exception) {
@@ -38,10 +39,14 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         return buildExceptionResponse(
                 BAD_REQUEST,
                 exception.getMessage(),
-                bindingResult.getFieldErrors().stream()
-                .map(fieldError -> fieldError.getDefaultMessage())
-                .toList());
-        }
+                bindingResult.getAllErrors().stream()
+                        .map(objectError -> objectError.getDefaultMessage())
+                        .toList());
+    }
+
+    //Exceptions para testar com delete
+    //EmptyResultDataAccessException
+    //DataIntegrityVioletionException 
 
     // Para @Valid do beanValidation erro 400
     // MethodArgumentNotValidException
