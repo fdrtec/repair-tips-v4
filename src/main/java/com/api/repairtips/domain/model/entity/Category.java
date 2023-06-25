@@ -18,6 +18,12 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+/*
+* 
+ * select no front
+ * fabricante(hp)-tipo(impressora)-categoria(laser)-modelosEquipamentos
+ */
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -40,6 +46,9 @@ public class Category implements Comparable<Category> {
     @ManyToOne
     @JoinColumn(name = "type_fk", referencedColumnName="type_id", nullable = false)
     private Type type;
+
+    @Column(name = "active")
+    private Boolean active;
     
     @Override
     public int compareTo(Category other) {

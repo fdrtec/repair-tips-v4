@@ -14,6 +14,12 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+/*
+* 
+ * select no front
+ * fabricante(hp)-tipo(impressora)-categoria(laser)-modelosEquipamentos
+ */
+
 @Data
 @Builder
 @AllArgsConstructor
