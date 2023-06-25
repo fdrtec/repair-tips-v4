@@ -1,0 +1,1 @@
+UPDATE rtdbv4.tb_category SET category_active = true;

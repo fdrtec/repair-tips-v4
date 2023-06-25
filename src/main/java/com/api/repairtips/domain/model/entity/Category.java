@@ -2,8 +2,6 @@ package com.api.repairtips.domain.model.entity;
 
 import java.util.UUID;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -42,12 +40,12 @@ public class Category implements Comparable<Category> {
     private String name;
 
     //v11.2 algaworks refinando payload = problema de atualizar objectos internos
-    @JsonIgnoreProperties(value = "nome", allowGetters = true)
+    // @JsonIgnoreProperties(value = "name", allowGetters = true)
     @ManyToOne
-    @JoinColumn(name = "type_fk", referencedColumnName="type_id", nullable = false)
+    @JoinColumn(name = "category_type_fk", referencedColumnName="type_id", nullable = false)
     private Type type;
 
-    @Column(name = "active")
+    @Column(name = "category_active")
     private Boolean active;
     
     @Override

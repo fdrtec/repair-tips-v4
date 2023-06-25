@@ -5,8 +5,7 @@ CREATE TABLE rtdbv4.tb_category (
 
     PRIMARY KEY (category_id), 
     CONSTRAINT category_type_fk   
-    FOREIGN KEY (type_fk) REFERENCES rtdbv4.tb_type (type_id)
-    
+    FOREIGN KEY (type_fk) REFERENCES rtdbv4.tb_type (type_id)    
 )
 ENGINE=InnoDB
 DEFAULT CHARSET=utf8mb4
