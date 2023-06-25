@@ -29,6 +29,10 @@ public class TypeService extends ModelAssembler<TypeDTO, Type> {
     private final TypeRepository repository;
 
     public List<TypeDTO> findAll() {
+        //exemplo de programação defensiva
+        // if(list.isEmpty()){
+        //     throw new IllegalStateException("descrição qualquer coisa ilegal")
+        // }
         return this.toCollectionDTO(repository.findAll());
     }
 
@@ -68,11 +72,11 @@ public class TypeService extends ModelAssembler<TypeDTO, Type> {
     // repository.saveAndFlush(this.toEntity(typeDTO));
     // }
 
-    private void existsById(UUID id) {
-        if (!repository.existsById(id)) {
-            throw new NotFoundException("ENTITY_NOT_FOUND");
-        }
-    }
+    // private void existsById(UUID id) {
+    //     if (!repository.existsById(id)) {
+    //         throw new NotFoundException("ENTITY_NOT_FOUND");
+    //     }
+    // }
 
     @Transactional
     public TypeDTO update(TypeDTO typeDTO) {

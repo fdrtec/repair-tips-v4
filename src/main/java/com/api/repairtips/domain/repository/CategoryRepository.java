@@ -13,6 +13,6 @@ public interface CategoryRepository extends JpaRepository<Category, UUID>{
 
     List<Category> findByType(Type type);
 
-    Optional<List<Type>> findByIdFetchTypes(UUID id);
+    // Optional<List<Type>> findByIdFetchTypes(UUID id);
     
 }

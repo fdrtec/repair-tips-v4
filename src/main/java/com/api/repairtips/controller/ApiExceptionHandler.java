@@ -1,7 +1,6 @@
 package com.api.repairtips.controller;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
-import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
@@ -9,8 +8,6 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -31,18 +28,18 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
     // para fazer testes com atributos com @Valid - rever algaworks 9.11
     // messages.properties
-    @ResponseStatus(BAD_REQUEST)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ApiError handleMethodArgumentNotValidException(MethodArgumentNotValidException exception) {
-        BindingResult bindingResult = exception.getBindingResult();
+    // @ResponseStatus(BAD_REQUEST)
+    // @ExceptionHandler(MethodArgumentNotValidException.class)
+    // public ApiError handleMethodArgumentNotValidException(MethodArgumentNotValidException exception) {
+    //     BindingResult bindingResult = exception.getBindingResult();
 
-        return buildExceptionResponse(
-                BAD_REQUEST,
-                exception.getMessage(),
-                bindingResult.getAllErrors().stream()
-                        .map(objectError -> objectError.getDefaultMessage())
-                        .toList());
-    }
+    //     return buildExceptionResponse(
+    //             BAD_REQUEST,
+    //             exception.getMessage(),
+    //             bindingResult.getAllErrors().stream()
+    //                     .map(objectError -> objectError.getDefaultMessage())
+    //                     .toList());
+    // }
 
     //Exceptions para testar com delete
     //EmptyResultDataAccessException
