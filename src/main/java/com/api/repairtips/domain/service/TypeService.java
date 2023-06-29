@@ -1,18 +1,14 @@
 package com.api.repairtips.domain.service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.webjars.NotFoundException;
 
-import com.api.repairtips.domain.exception.BusinessException;
 import com.api.repairtips.domain.model.assembler.ModelAssembler;
 import com.api.repairtips.domain.model.dto.TypeDTO;
 import com.api.repairtips.domain.model.entity.Type;
@@ -43,17 +39,16 @@ public class TypeService extends ModelAssembler<TypeDTO, Type> {
     }
 
     @Transactional
-    public TypeDTO create(TypeDTO typeDTO) {
-        verifyConflictExistence(typeDTO.getName());
-        Type type = repository.saveAndFlush(this.toEntity(typeDTO));
-        return this.toDTO(type);
+    public TypeDTO create(TypeDTO dto) {
+        hasConflict(dto);
+        Type entity = repository.saveAndFlush(this.toEntity(dto));
+        return this.toDTO(entity);
     }
 
-    private void verifyConflictExistence(String typeName) {
-        repository.findByName(typeName)
-                .ifPresent((type) -> {
-                    throw new BusinessException(new EntityExistsException("ENTITY_ALREADY_EXISTS"));
-                });
+    private void hasConflict(TypeDTO dto) {
+        if(repository.findByName(dto.getName()).isPresent()){
+            new EntityExistsException("ENTITY_ALREADY_EXISTS");
+        }               
     }
 
     @Transactional
