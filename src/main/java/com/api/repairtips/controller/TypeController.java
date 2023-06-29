@@ -30,20 +30,19 @@ public class TypeController implements TypeControllerDocs {
 
     private final TypeService typeService;
 
-    @Operation(summary = "Get type list")
+    @Operation(summary = "Get list of dtos")
     @ApiResponse(responseCode = "200", description = "Type list found")
     @GetMapping
-    public List<TypeDTO> getTypes() {
+    public List<TypeDTO> findAll() {
         return typeService.findAll();
     }
     
-    @Operation(summary = "Get a type by its id")
+    @Operation(summary = "Get a dto by its id")
     @ApiResponse(responseCode = "200", description = "Type found")
     @GetMapping("{id}")
     public TypeDTO findById(@PathVariable UUID id){
         return typeService.findById(id);
     }
-
     
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -51,10 +50,10 @@ public class TypeController implements TypeControllerDocs {
         return typeService.create(dto);
     }
 
-    @DeleteMapping
+    @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable UUID id) {
-        typeService.deleteById(id);
+    public void deleteById(@PathVariable UUID id) {
+        typeService.delete(id);
     }
 
     @PutMapping

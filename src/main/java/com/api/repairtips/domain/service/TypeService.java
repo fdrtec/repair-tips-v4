@@ -57,7 +57,7 @@ public class TypeService extends ModelAssembler<TypeDTO, Type> {
     }
 
     @Transactional
-    public void deleteById(UUID id) {
+    public void delete(UUID id) {
         // verificar se é preciso essa validação abstractCrud
         // existsById(id);        
         repository.delete(repository.findById(id).get());        
@@ -79,17 +79,29 @@ public class TypeService extends ModelAssembler<TypeDTO, Type> {
     // }
 
     @Transactional
-    public TypeDTO update(TypeDTO typeDTO) {
-        Optional<Type> typeOriginal = repository.findById(typeDTO.getId());
-
-        if (typeOriginal.isPresent()) {
-            BeanUtils.copyProperties(this.toEntity(typeDTO), typeOriginal.get(), "id");
-            Type typeAtualizado = repository.save(typeOriginal.get());
-
-            return this.toDTO(typeAtualizado);
-        }
-        throw new NotFoundException("ENTITY_NOT_FOUND");
+    public void update(TypeDTO typeDTO) {        
+        mergeType(
+            repository.findById(typeDTO.getId()).get(),
+            this.toEntity(typeDTO)
+            );      
     }
+
+    private void mergeType(Type original, Type update) {
+        original = update;
+    }
+
+    // @Transactional
+    // public TypeDTO update(TypeDTO typeDTO) {
+    //     Optional<Type> typeOriginal = repository.findById(typeDTO.getId());
+
+    //     if (typeOriginal.isPresent()) {
+    //         BeanUtils.copyProperties(this.toEntity(typeDTO), typeOriginal.get(), "id");
+    //         Type typeAtualizado = repository.save(typeOriginal.get());
+
+    //         return this.toDTO(typeAtualizado);
+    //     }
+    //     throw new NotFoundException("ENTITY_NOT_FOUND");
+    // }
 
     // examplo de sintaxe antiga (guardar o uso do orElseGet)
     public void updateOldSintaxe(Type type) {
