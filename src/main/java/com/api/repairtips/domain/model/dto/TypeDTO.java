@@ -1,26 +1,13 @@
 package com.api.repairtips.domain.model.dto;
 
-import java.io.Serializable;
-import java.util.UUID;
-
 // import org.hibernate.validator.constraints.Range;
 
 // import org.hibernate.validator.constraints.br.CPF;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
 
-@Data
-@AllArgsConstructor
-@RequiredArgsConstructor
-public class TypeDTO implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
-    private UUID id;
+public class TypeDTO extends BaseDTO {    
 
     @NotBlank
     @Size(max = 255)
@@ -34,6 +21,7 @@ public class TypeDTO implements Serializable {
     
     // private LocalDateTime createdDate;
     
+    // @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     // private LocalDateTime lastModifiedDate;    
     
     // @NotEmpty
