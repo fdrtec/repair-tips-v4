@@ -4,10 +4,15 @@ import java.util.UUID;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /*
 * 
@@ -18,11 +23,15 @@ import lombok.EqualsAndHashCode;
 @Data
 @Builder
 @EqualsAndHashCode(of = {"name"}, callSuper=false)
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "tb_type")
 @Entity
 public class Type extends BaseEntity<Type> {
 
-    @Column(name = "tb_id")
+    @Id
+    @Column(name = "type_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)    
     private UUID id;  
 
     @Column(name = "type_name", nullable = false, unique = true)

@@ -6,24 +6,32 @@ package com.api.repairtips.domain.model.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
-public class TypeDTO extends BaseDTO {    
+@Data
+@EqualsAndHashCode(callSuper = false)
+@AllArgsConstructor
+@NoArgsConstructor
+public class TypeDTO extends BaseDTO {
 
     @NotBlank
-    @Size(max = 255)
-    private String name; 
-    
+    @Size(max = 150)
+    private String name;
+
     // @CPF
     // private String cpf;
 
     // @Range(min = 10, max = 20)
     // private Integer limite;
-    
+
     // private LocalDateTime createdDate;
-    
+
     // @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
-    // private LocalDateTime lastModifiedDate;    
-    
+    // private LocalDateTime lastModifiedDate;
+
     // @NotEmpty
     // @DecimalMin("0")
     // @PositiveOrZero

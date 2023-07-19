@@ -22,7 +22,7 @@ public class ApiError {
     
     private String message;
 
-    private List<String> errors;
+    private List<?> errors;
 }
 //Algaworks: Padrão RFC 7807 - Problem detail for HTTP API 
 //private Integer status
