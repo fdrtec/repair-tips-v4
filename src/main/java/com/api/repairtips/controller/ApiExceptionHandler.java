@@ -1,15 +1,21 @@
 package com.api.repairtips.controller;
 
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collections;
+import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -20,21 +26,45 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import com.api.repairtips.domain.exception.ApiError;
 import com.api.repairtips.domain.exception.ErrorMessage;
 
+import lombok.extern.log4j.Log4j2;
+
+@Log4j2
 @RestControllerAdvice
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
+    @ResponseStatus(BAD_REQUEST)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ApiError handleMethodArgumentNotValidException(MethodArgumentNotValidException ex, WebRequest request) {
+        List<String> errors = ex.getBindingResult().getFieldErrors()
+            .stream().map(FieldError::getDefaultMessage)
+            .collect(Collectors.toList());
+        
+            log.info(request.getContextPath());
+        
+        log.error("MethodArgumentNotValidException: ", errors);
+        
+        return null;
+    }
+    
     // Pai das exceptions do jpa
     // javax.persistence.PersistenceException
     // quando estiver encapsulado por um optional lança só
     // NoSuchElementException(.get)
     @ResponseStatus(NOT_FOUND)
     @ExceptionHandler(NoSuchElementException.class)
-    public ApiError handleNoSuchElementException(NoSuchElementException exception) {
-        Throwable rootCause = ExceptionUtils.getRootCause(exception);
+    public ApiError handleNoSuchElementException(BindException ex) {
+        // Throwable rootCause = ExceptionUtils.getRootCause(ex);
+        logger.error("NoSuchElementException: ", ex);
+        
+        //TODO: criar enum para tipar os tipos de erros
+        // ApiErrorType apiErrorType = ApiErrorType.NOT_FOUND;
+        
         // BindingResult bindingResult = exception.getBindingResult();
 
-        return buildExceptionResponse(NOT_FOUND, rootCause);
+        return buildExceptionResponse(NOT_FOUND, ex);
     }
+
+
 
     @ExceptionHandler(Exception.class)
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
@@ -42,7 +72,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         ErrorMessage message = new ErrorMessage(
                 HttpStatus.INTERNAL_SERVER_ERROR.value(),
                 LocalDateTime.now(),
-                ex.getMessage(),
+                ex.toString(),
                 request.getDescription(false));
 
         return message;
@@ -100,14 +130,14 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     // Collections.singletonList(exception.getMessage()));
     // }
 
-    private ApiError buildExceptionResponse(HttpStatus status, Throwable ex) {
-        // BindingResult bindingResult = ((BindException) ex).getBindingResult();
+    private ApiError buildExceptionResponse(HttpStatus status, BindException ex) {
+         BindingResult bindingResult = ex.getBindingResult();
 
         return ApiError.builder()
                 .timestamp(LocalDateTime.now())
                 .status(status.value())
-                .message(ex.getMessage())
-                .errors(Collections.singletonList(ex.getLocalizedMessage()))
+                .message(ex.toString())
+                .error(ex.getLocalizedMessage())
                 .build();
     }
 

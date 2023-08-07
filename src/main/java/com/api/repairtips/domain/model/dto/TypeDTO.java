@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class TypeDTO extends BaseDTO {
 
-    @NotBlank
+    @NotBlank(message = "name is required")
     @Size(max = 150)
     private String name;
 
