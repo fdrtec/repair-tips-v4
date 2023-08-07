@@ -19,13 +19,12 @@ import jakarta.persistence.EntityExistsException;
 import lombok.RequiredArgsConstructor;
 
 @Service
-// @EnableJpaRepositories
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
 public class TypeService extends ModelAssembler<TypeDTO, Type> {
 
     private final TypeRepository repository;
 
+    @Transactional(readOnly = true)
     public List<TypeDTO> findAll() {
         // exemplo de programação defensiva
         // if(list.isEmpty()){
@@ -34,17 +33,15 @@ public class TypeService extends ModelAssembler<TypeDTO, Type> {
         return this.toCollectionDTO(repository.findAll());
     }
 
+    @Transactional(readOnly = true)
     public TypeDTO findById(UUID id) {
-        return this.toDTO(repository.findById(id).get());
-        // .orElseThrow(() -> new BusinessException(
-        // new NotFoundException("ENTITY_NOT_FOUND"))));
+        return this.toDTO(repository.findById(id).get());        
     }
 
     @Transactional
     public TypeDTO create(TypeDTO dto) {
         hasConflict(dto);
-        Type entity = repository.saveAndFlush(this.toEntity(dto));
-        return this.toDTO(entity);
+        return this.toDTO(repository.saveAndFlush(this.toEntity(dto)));        
     }
 
     private void hasConflict(TypeDTO dto) {
@@ -54,56 +51,16 @@ public class TypeService extends ModelAssembler<TypeDTO, Type> {
     }
 
     @Transactional
-    public void delete(UUID id) {
-        // verificar se é preciso essa validação abstractCrud
-        // existsById(id);
-        repository.delete(repository.findById(id).get());
-
-        // tratamento para descarregar o banco dentro do try - algaworks
+    public void delete(UUID id) {        
+        repository.delete(repository.findById(id).get());        
         repository.flush();
     }
-
-    // @Transactional
-    // public void update(TypeDTO typeDTO) {
-    // existsById(typeDTO.getId());
-    // repository.saveAndFlush(this.toEntity(typeDTO));
-    // }
-
-    // private void existsById(UUID id) {
-    // if (!repository.existsById(id)) {
-    // throw new NotFoundException("ENTITY_NOT_FOUND");
-    // }
-    // }
-
+    
     @Transactional
-    public void update(TypeDTO dto) {
-        UUID id = dto.getId(); 
-        Type original =  repository.findById(id).get();
-        Type updated = this.toEntity(dto);
-        BeanUtils.copyProperties(original, updated, "id");        
-    }
-
-    // @Transactional
-    // public TypeDTO update(TypeDTO typeDTO) {
-    //     Optional<Type> typeOriginal = repository.findById(typeDTO.getId());
- 
-    //     if (typeOriginal.isPresent()) {
-    //     BeanUtils.copyProperties(this.toEntity(typeDTO), typeOriginal.get(), "id");
-    // Type typeAtualizado = repository.save(typeOriginal.get());
- 
-    //         return this.toDTO(typeAtualizado);
-    // 
-    // throw new NotFoundException("ENTITY_NOT_FOUND");
-    // 
-
-    // examplo de sintaxe antiga (guardar o uso do orElseGet)
-    public void updateOldSintaxe(Type type) {
-        repository.findById(type.getId()).map(typeExistence -> {
-            type.setId(typeExistence.getId());
-            repository.save(type);
-            return ResponseEntity.noContent().build();
-        }).orElseGet(() -> ResponseEntity.notFound().build());
-    }
+    public void update(TypeDTO dto) {    
+        repository.findById(dto.getId()).get();
+        repository.saveAndFlush(this.toEntity(dto));                
+    }    
 
     //alternativa para filtro com example, isso seria via parametros via get :(
     public List<Type> filterFind(Type filter) {

@@ -32,20 +32,20 @@ import lombok.extern.log4j.Log4j2;
 @RestControllerAdvice
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ResponseStatus(BAD_REQUEST)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ApiError handleMethodArgumentNotValidException(MethodArgumentNotValidException ex, WebRequest request) {
-        List<String> errors = ex.getBindingResult().getFieldErrors()
-            .stream().map(FieldError::getDefaultMessage)
-            .collect(Collectors.toList());
-        
-            log.info(request.getContextPath());
-        
-        log.error("MethodArgumentNotValidException: ", errors);
-        
-        return null;
-    }
-    
+    // @ResponseStatus(BAD_REQUEST)
+    // @ExceptionHandler(MethodArgumentNotValidException.class)
+    // public ApiError handleMethodArgumentNotValidException(MethodArgumentNotValidException ex, WebRequest request) {
+    //     List<String> errors = ex.getBindingResult().getFieldErrors()
+    //             .stream().map(FieldError::getDefaultMessage)
+    //             .collect(Collectors.toList());
+
+    //     log.info(request.getContextPath());
+
+    //     log.error("MethodArgumentNotValidException: ", errors);
+
+    //     return null;
+    // }
+
     // Pai das exceptions do jpa
     // javax.persistence.PersistenceException
     // quando estiver encapsulado por um optional lança só
@@ -55,16 +55,14 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     public ApiError handleNoSuchElementException(BindException ex) {
         // Throwable rootCause = ExceptionUtils.getRootCause(ex);
         logger.error("NoSuchElementException: ", ex);
-        
-        //TODO: criar enum para tipar os tipos de erros
+
+        // TODO: criar enum para tipar os tipos de erros
         // ApiErrorType apiErrorType = ApiErrorType.NOT_FOUND;
-        
+
         // BindingResult bindingResult = exception.getBindingResult();
 
         return buildExceptionResponse(NOT_FOUND, ex);
     }
-
-
 
     @ExceptionHandler(Exception.class)
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
@@ -131,7 +129,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     // }
 
     private ApiError buildExceptionResponse(HttpStatus status, BindException ex) {
-         BindingResult bindingResult = ex.getBindingResult();
+        // BindingResult bindingResult = ex.getBindingResult();
 
         return ApiError.builder()
                 .timestamp(LocalDateTime.now())
