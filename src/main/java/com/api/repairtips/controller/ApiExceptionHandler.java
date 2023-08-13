@@ -1,30 +1,21 @@
 package com.api.repairtips.controller;
 
-import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
+import java.net.URI;
 import java.time.LocalDateTime;
-import java.util.Collections;
-import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.BindException;
+import org.springframework.http.ProblemDetail;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.api.repairtips.domain.exception.ApiError;
-import com.api.repairtips.domain.exception.ErrorMessage;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -46,35 +37,31 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     //     return null;
     // }
 
-    // Pai das exceptions do jpa
-    // javax.persistence.PersistenceException
-    // quando estiver encapsulado por um optional lança só
-    // NoSuchElementException(.get)
+    
     @ResponseStatus(NOT_FOUND)
     @ExceptionHandler(NoSuchElementException.class)
-    public ApiError handleNoSuchElementException(BindException ex) {
-        // Throwable rootCause = ExceptionUtils.getRootCause(ex);
-        logger.error("NoSuchElementException: ", ex);
-
-        // TODO: criar enum para tipar os tipos de erros
-        // ApiErrorType apiErrorType = ApiErrorType.NOT_FOUND;
-
-        // BindingResult bindingResult = exception.getBindingResult();
-
-        return buildExceptionResponse(NOT_FOUND, ex);
+    public ProblemDetail handleNoSuchElementException(Exception ex) {               
+        logger.error(ExceptionUtils.getStackTrace(ex).substring(0, 500));        
+        return buildProblemDetail(NOT_FOUND, ex);        
     }
 
-    @ExceptionHandler(Exception.class)
-    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
-    public ErrorMessage globalExceptionHandler(Exception ex, WebRequest request) {
-        ErrorMessage message = new ErrorMessage(
-                HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                LocalDateTime.now(),
-                ex.toString(),
-                request.getDescription(false));
-
-        return message;
+    private ProblemDetail buildProblemDetail(HttpStatus status, Exception ex){
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(status, ex.getLocalizedMessage());        
+        problemDetail.setType(URI.create(ex.getClass().getName()));
+        return problemDetail; 
     }
+
+    // @ExceptionHandler(Exception.class)
+    // @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+    // public ErrorMessage globalExceptionHandler(Exception ex, WebRequest request) {
+    //     ErrorMessage message = new ErrorMessage(
+    //             HttpStatus.INTERNAL_SERVER_ERROR.value(),
+    //             LocalDateTime.now(),
+    //             ex.toString(),
+    //             request.getDescription(false));
+
+    //     return message;
+    // }
 
     // erro de ambiguidade
     // @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -128,7 +115,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     // Collections.singletonList(exception.getMessage()));
     // }
 
-    private ApiError buildExceptionResponse(HttpStatus status, BindException ex) {
+    private ApiError buildExceptionResponse(HttpStatus status, Exception ex) {
         // BindingResult bindingResult = ex.getBindingResult();
 
         return ApiError.builder()

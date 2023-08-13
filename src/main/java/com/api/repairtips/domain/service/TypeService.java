@@ -33,7 +33,7 @@ public class TypeService extends ModelAssembler<TypeDTO, Type> {
         return this.toCollectionDTO(repository.findAll());
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public TypeDTO findById(UUID id) {
         return this.toDTO(repository.findById(id).get());        
     }
