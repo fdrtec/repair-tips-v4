@@ -17,8 +17,5 @@ abstract class AbstractCrudController<D, S extends IcrudService<D>> {
     protected List<D> getAll(){
         return service.getAll();
 
-    }
-
-
-    
+    }    
 }
