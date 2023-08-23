@@ -1,5 +1,6 @@
 package com.api.repairtips.domain.model.entity;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import org.springframework.data.annotation.CreatedDate;
@@ -16,10 +17,12 @@ import lombok.Setter;
 @Setter
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public abstract class Auditable {
+public abstract class Auditable implements Serializable {
+
+    protected static final long serialVersionUID = 1L;
 
     @CreatedDate
-    @Column(nullable = false)
+    @Column
     protected LocalDateTime createdDate;
 
     @LastModifiedDate
