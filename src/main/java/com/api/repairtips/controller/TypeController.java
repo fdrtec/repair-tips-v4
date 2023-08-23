@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.api.repairtips.controller.docs.TypeControllerDocs;
+import com.api.repairtips.controller.docs.ControllerDocs;
 import com.api.repairtips.domain.model.dto.TypeDTO;
 import com.api.repairtips.domain.service.TypeService;
 
@@ -25,7 +25,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/types")
 @RequiredArgsConstructor
-public class TypeController implements TypeControllerDocs {
+public class TypeController implements ControllerDocs<TypeDTO> {
 
     private final TypeService typeService;
 
@@ -41,9 +41,6 @@ public class TypeController implements TypeControllerDocs {
         return typeService.findById(id);
     }
     
-    @PostMapping
-    @Operation(summary = "Create new entity")
-    @ResponseStatus(HttpStatus.CREATED)
     public TypeDTO create(@RequestBody @Valid TypeDTO dto){
         return typeService.create(dto);
     }
