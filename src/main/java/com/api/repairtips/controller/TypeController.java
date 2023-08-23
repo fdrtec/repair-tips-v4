@@ -56,9 +56,8 @@ public class TypeController implements TypeControllerDocs {
         typeService.delete(id);
     }
 
-    @PutMapping
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@RequestBody @Valid TypeDTO typeDTO){
-        typeService.update(typeDTO);
+    @PutMapping    
+    public TypeDTO update(@RequestBody @Valid TypeDTO typeDTO){
+        return typeService.update(typeDTO);
     }  
 }

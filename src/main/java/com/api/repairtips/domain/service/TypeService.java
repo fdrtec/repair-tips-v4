@@ -57,9 +57,10 @@ public class TypeService extends ModelAssembler<TypeDTO, Type> {
     }
     
     @Transactional
-    public void update(TypeDTO dto) {    
-        repository.findById(dto.getId()).get();
-        repository.saveAndFlush(this.toEntity(dto));                
+    public TypeDTO update(TypeDTO dto) {    
+        Type type = repository.findById(dto.getId()).get();
+        BeanUtils.copyProperties(this.toEntity(dto), type, "id");
+        return this.toDTO(repository.saveAndFlush(type));                
     }    
 
     //alternativa para filtro com example, isso seria via parametros via get :(
