@@ -35,12 +35,12 @@ public class TypeController implements ControllerDocs<TypeDTO> {
         return typeService.findAll();
     }
     
-    @Operation(summary = "Get a dto by its id")
-    @GetMapping("{id}")
+    @Override
     public TypeDTO findById(@PathVariable UUID id){
         return typeService.findById(id);
     }
     
+    @Override
     public TypeDTO create(@RequestBody @Valid TypeDTO dto){
         return typeService.create(dto);
     }
@@ -56,5 +56,7 @@ public class TypeController implements ControllerDocs<TypeDTO> {
     @Operation(summary = "Update entity")    
     public TypeDTO update(@RequestBody @Valid TypeDTO typeDTO){
         return typeService.update(typeDTO);
-    }  
+    }
+
+    
 }

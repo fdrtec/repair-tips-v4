@@ -1,12 +1,18 @@
 package com.api.repairtips.domain.model.entity;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -36,6 +42,13 @@ public class Type extends BaseEntity<Type> {
 
     @Column(name = "type_name", nullable = false, unique = true)
     private String name;
+
+    
+    // mapeamente bidirecional, sem json ignore dá referencia circular
+    // o mais seguro é fazer um endpoint em category buscando uma lista de categories by type
+    @JsonIgnore
+    @OneToMany(mappedBy = "type")
+    private List<Category> categories;
 
     public int compareTo(Type other) {
         return name.compareTo(other.getName());
