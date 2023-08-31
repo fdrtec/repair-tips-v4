@@ -44,9 +44,11 @@ public class Type extends BaseEntity<Type> {
     private String name;
 
     
-    // mapeamente bidirecional, sem json ignore dá referencia circular
+    // mapeamente bidirecional, sem jsonIgnore dá referencia circular
+    // relacionamento bidirecional não é considerado uma boa prática
     // o mais seguro é fazer um endpoint em category buscando uma lista de categories by type
-    @JsonIgnore
+    // neste caso vamos adicionar anotação no category, porque vamos precisar da lista
+    // @JsonIgnore
     @OneToMany(mappedBy = "type")
     private List<Category> categories;
 

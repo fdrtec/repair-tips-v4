@@ -2,6 +2,8 @@ package com.api.repairtips.domain.model.entity;
 
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -41,6 +43,7 @@ public class Category implements Comparable<Category> {
 
     //v11.2 algaworks refinando payload = problema de atualizar objectos internos
     // @JsonIgnoreProperties(value = "name", allowGetters = true)
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "category_type_fk", referencedColumnName="type_id", nullable = false)
     private Type type;
