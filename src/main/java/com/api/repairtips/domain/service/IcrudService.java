@@ -1,15 +1,17 @@
 package com.api.repairtips.domain.service;
 
-import java.util.List;
 import java.util.UUID;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface IcrudService <D> {
     
-    List<D> getAll();
+    Page<D> findAll(Pageable pageable);
 
-    D getById(UUID id);
+    D findById(UUID id);
 
-    D save(D dto);
+    D create(D dto);
 
     void update(D dto);
 

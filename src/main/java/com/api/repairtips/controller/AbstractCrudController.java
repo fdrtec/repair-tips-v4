@@ -1,7 +1,7 @@
 package com.api.repairtips.controller;
 
-import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.api.repairtips.domain.service.IcrudService;
@@ -14,8 +14,7 @@ abstract class AbstractCrudController<D, S extends IcrudService<D>> {
     
     protected final S service;
 
-    protected List<D> getAll(){
-        return service.getAll();
-
+    protected Page<D> findAll(Pageable pageable){
+        return service.findAll(pageable);
     }    
 }

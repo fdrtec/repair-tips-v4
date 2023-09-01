@@ -1,10 +1,11 @@
 package com.api.repairtips.domain.service;
 
-import java.util.List;
 import java.util.UUID;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,8 +22,8 @@ abstract class AbstractCrudService<D, E, R extends JpaRepository<E, UUID>> exten
     protected final R repository;
 
     @Override
-    public List<D> getAll() {
-        return this.toCollectionDTO(repository.findAll());
+    public Page<D> findAll(Pageable pageable) {
+        return this.toCollectionDTO(repository.findAll(pageable));
     }
 
     @Transactional

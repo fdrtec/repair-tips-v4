@@ -3,6 +3,8 @@ package com.api.repairtips.controller;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +22,7 @@ import com.api.repairtips.domain.service.TypeService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
+import jakarta.websocket.OnClose;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -29,10 +32,9 @@ public class TypeController implements ControllerDocs<TypeDTO> {
 
     private final TypeService typeService;
 
-    @Operation(summary = "Get list of dtos")
-    @GetMapping
-    public List<TypeDTO> findAll() {
-        return typeService.findAll();
+    @Override
+    public Page<TypeDTO> findAll(Pageable pageable) {
+        return typeService.findAll(pageable);
     }
     
     @Override
@@ -45,18 +47,14 @@ public class TypeController implements ControllerDocs<TypeDTO> {
         return typeService.create(dto);
     }
 
-    @DeleteMapping("{id}")
-    @Operation(summary = "Delete entity by its id")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Override
     public void deleteById(@PathVariable UUID id) {
         typeService.delete(id);
     }
 
-    @PutMapping
-    @Operation(summary = "Update entity")    
+    @Override
     public TypeDTO update(@RequestBody @Valid TypeDTO typeDTO){
         return typeService.update(typeDTO);
     }
-
-    
+        
 }

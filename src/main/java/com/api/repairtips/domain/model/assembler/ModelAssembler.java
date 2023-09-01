@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 
 public abstract class ModelAssembler<T, S> {
 
@@ -23,10 +25,12 @@ public abstract class ModelAssembler<T, S> {
 		return mapper.map(model, dtoType);
 	}
 
-	public List<T> toCollectionDTO(List<S> models) {
-		return models.stream()
+	public Page<T> toCollectionDTO(Page<S> models) {
+		List<T> dtos = models.stream()
 				.map((S model) -> this.toDTO(model))
 				.collect(Collectors.toList());
+		
+		return new PageImpl<T>(dtos);
 	}
 
 }
