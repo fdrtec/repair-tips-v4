@@ -9,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 
 public abstract class ModelAssembler<T, S> {
 
@@ -25,12 +26,11 @@ public abstract class ModelAssembler<T, S> {
 		return mapper.map(model, dtoType);
 	}
 
-	public Page<T> toCollectionDTO(Page<S> models) {
-		List<T> dtos = models.stream()
-				.map((S model) -> this.toDTO(model))
-				.collect(Collectors.toList());
-		
-		return new PageImpl<T>(dtos);
+	public Page<T> toCollectionDTO(Page<S> models, Pageable pageable) {
+		return new PageImpl<T>(
+				models.stream()
+						.map((S model) -> this.toDTO(model))
+						.collect(Collectors.toList()),
+				pageable, models.getTotalElements());
 	}
-
 }

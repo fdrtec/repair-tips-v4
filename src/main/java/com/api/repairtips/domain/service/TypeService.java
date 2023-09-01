@@ -31,7 +31,7 @@ public class TypeService extends ModelAssembler<TypeDTO, Type> {
         // if(list.isEmpty()){
         // throw new IllegalStateException("descrição qualquer coisa ilegal")
         // }
-        return this.toCollectionDTO(repository.findAll(pageable));
+        return this.toCollectionDTO(repository.findAll(pageable), pageable);
     }
 
     @Transactional
