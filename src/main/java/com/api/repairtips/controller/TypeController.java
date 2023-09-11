@@ -1,30 +1,25 @@
 package com.api.repairtips.controller;
 
-import java.util.List;
 import java.util.UUID;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.api.repairtips.controller.docs.ControllerDocs;
 import com.api.repairtips.domain.model.dto.TypeDTO;
 import com.api.repairtips.domain.service.TypeService;
 
-import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
-import jakarta.websocket.OnClose;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
 
+@Validated
 @RestController
 @RequestMapping("/types")
 @RequiredArgsConstructor
@@ -38,7 +33,7 @@ public class TypeController implements ControllerDocs<TypeDTO> {
     }
     
     @Override
-    public TypeDTO findById(@PathVariable UUID id){
+    public TypeDTO findById(@PathVariable @NotNull @Positive UUID id){
         return typeService.findById(id);
     }
     
