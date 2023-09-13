@@ -22,6 +22,7 @@ abstract class AbstractCrudService<D, E, R extends JpaRepository<E, UUID>> exten
     protected final R repository;
 
     @Override
+    @Transactional(readOnly = true)
     public Page<D> findAll(Pageable pageable) {
         return this.toCollectionDTO(repository.findAll(pageable), pageable);
     }

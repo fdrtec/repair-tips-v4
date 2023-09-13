@@ -49,8 +49,8 @@ public class Type extends BaseEntity<Type> {
     // o mais seguro é fazer um endpoint em category buscando uma lista de categories by type
     // neste caso vamos adicionar anotação no category, porque vamos precisar da lista
     // @JsonIgnore
-    @OneToMany(mappedBy = "type")
-    private List<Category> categories;
+    // @OneToMany(mappedBy = "type")
+    // private List<Category> categories;
 
     public int compareTo(Type other) {
         return name.compareTo(other.getName());
