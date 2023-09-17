@@ -20,26 +20,26 @@ import jakarta.validation.constraints.NotNull;
 
 public interface ControllerDocs<D> {
     
-    @Operation(summary = "Persist a new entity")    
+    @Operation(summary = "Persist a new data")    
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public D create(@RequestBody @Valid D dto);
 
-    @Operation(summary = "Get a dto by its id")
+    @Operation(summary = "Get a data by its id")
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("{id}")
     public D findById(@PathVariable @NotNull UUID id);
 
-    @Operation(summary = "Get DTO list by pagination")
+    @Operation(summary = "Get data List by pagination")
     @GetMapping
     public Page<D> findAll(Pageable pageable);
 
     @DeleteMapping("{id}")
-    @Operation(summary = "Delete entity by its id")
+    @Operation(summary = "Delete a data by its id")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteById(@PathVariable @Valid UUID id);
 
     @PutMapping
-    @Operation(summary = "Update entity")    
+    @Operation(summary = "Update a data")    
     public D update(@RequestBody @Valid D dto);
 }
