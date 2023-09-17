@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.api.repairtips.controller.docs.ControllerDocs;
 import com.api.repairtips.domain.model.dto.TypeDTO;
-import com.api.repairtips.domain.service.TypeService;
+import com.api.repairtips.domain.service.support.TypeService;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;

@@ -13,7 +13,7 @@ public interface IcrudService <D> {
 
     D create(D dto);
 
-    void update(D dto);
+    D update(D dto);
 
     void delete(UUID id);
 

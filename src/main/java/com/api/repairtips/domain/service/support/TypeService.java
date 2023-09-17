@@ -1,4 +1,4 @@
-package com.api.repairtips.domain.service;
+package com.api.repairtips.domain.service.support;
 
 import java.util.List;
 import java.util.UUID;
@@ -15,22 +15,19 @@ import com.api.repairtips.domain.model.assembler.ModelAssembler;
 import com.api.repairtips.domain.model.dto.TypeDTO;
 import com.api.repairtips.domain.model.entity.Type;
 import com.api.repairtips.domain.repository.TypeRepository;
+import com.api.repairtips.domain.service.IcrudService;
 
 import jakarta.persistence.EntityExistsException;
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class TypeService extends ModelAssembler<TypeDTO, Type> {
+public class TypeService extends ModelAssembler<TypeDTO, Type> implements IcrudService<TypeDTO> {
 
     private final TypeRepository repository;
 
     @Transactional(readOnly = true)
-    public Page<TypeDTO> findAll(Pageable pageable) {
-        // exemplo de programação defensiva
-        // if(list.isEmpty()){
-        // throw new IllegalStateException("descrição qualquer coisa ilegal")
-        // }
+    public Page<TypeDTO> findAll(Pageable pageable) {        
         return this.toCollectionDTO(repository.findAll(pageable), pageable);
     }
 

@@ -25,20 +25,30 @@ abstract class AbstractCrudService<D, E, R extends JpaRepository<E, UUID>> exten
     @Transactional(readOnly = true)
     public Page<D> findAll(Pageable pageable) {
         return this.toCollectionDTO(repository.findAll(pageable), pageable);
+    }    
+
+    @Override
+    public D create(D dto) {
+        // TODO Auto-generated method stub
+        return null;
     }
 
-    @Transactional
-    public void deleteById(UUID id) {
-        try {
-            repository.deleteById(id);
+    @Override
+    public void delete(UUID id) {
+        // TODO Auto-generated method stub
+        
+    }
 
-        } catch (EmptyResultDataAccessException e) {
-            throw e;
+    @Override
+    public D findById(UUID id) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-        } catch (DataIntegrityViolationException e) {
-            throw e;
-        }
-
+    @Override
+    public D update(D dto) {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }

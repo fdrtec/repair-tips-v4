@@ -8,6 +8,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.api.repairtips.domain.repository.TypeRepository;
+import com.api.repairtips.domain.service.support.TypeService;
 
 @ExtendWith(MockitoExtension.class)
 public class TypeServiceTest {
