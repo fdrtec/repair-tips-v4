@@ -1,4 +1,6 @@
-package com.api.repairtips.domain.model.dto;
+package com.api.repairtips.domain.model.dto.support;
+
+import com.api.repairtips.domain.model.dto.BaseDTO;
 
 // import org.hibernate.validator.constraints.Range;
 

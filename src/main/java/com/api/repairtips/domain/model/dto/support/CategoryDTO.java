@@ -3,7 +3,6 @@ package com.api.repairtips.domain.model.dto.support;
 import java.util.UUID;
 
 import com.api.repairtips.domain.model.dto.BaseDTO;
-import com.api.repairtips.domain.model.dto.TypeDTO;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

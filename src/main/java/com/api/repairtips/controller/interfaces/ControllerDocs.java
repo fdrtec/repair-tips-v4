@@ -1,6 +1,5 @@
-package com.api.repairtips.controller.docs;
+package com.api.repairtips.controller.interfaces;
 
-import java.util.List;
 import java.util.UUID;
 
 import org.springframework.data.domain.Page;
@@ -13,11 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.api.repairtips.domain.model.dto.TypeDTO;
-
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+
 
 public interface ControllerDocs<D> {
     
@@ -29,16 +28,16 @@ public interface ControllerDocs<D> {
     @Operation(summary = "Get a dto by its id")
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("{id}")
-    public TypeDTO findById(@PathVariable UUID id);
+    public D findById(@PathVariable @NotNull UUID id);
 
-    @Operation(summary = "Get list of dtos")
+    @Operation(summary = "Get DTO list by pagination")
     @GetMapping
     public Page<D> findAll(Pageable pageable);
 
     @DeleteMapping("{id}")
     @Operation(summary = "Delete entity by its id")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteById(@PathVariable UUID id);
+    public void deleteById(@PathVariable @Valid UUID id);
 
     @PutMapping
     @Operation(summary = "Update entity")    
