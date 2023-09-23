@@ -10,7 +10,7 @@ import com.api.repairtips.domain.model.assembler.ModelAssembler;
 import com.api.repairtips.domain.model.dto.support.CategoryDTO;
 import com.api.repairtips.domain.model.entity.Category;
 import com.api.repairtips.domain.repository.CategoryRepository;
-import com.api.repairtips.domain.service.IcrudService;
+import com.api.repairtips.domain.service.interfaces.IcrudService;
 
 import lombok.RequiredArgsConstructor;
 

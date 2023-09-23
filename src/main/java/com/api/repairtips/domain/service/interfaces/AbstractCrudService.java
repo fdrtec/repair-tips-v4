@@ -1,9 +1,7 @@
-package com.api.repairtips.domain.service;
+package com.api.repairtips.domain.service.interfaces;
 
 import java.util.UUID;
 
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

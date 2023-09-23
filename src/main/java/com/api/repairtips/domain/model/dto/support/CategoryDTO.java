@@ -1,7 +1,5 @@
 package com.api.repairtips.domain.model.dto.support;
 
-import java.util.UUID;
-
 import com.api.repairtips.domain.model.dto.BaseDTO;
 
 import jakarta.validation.constraints.NotBlank;

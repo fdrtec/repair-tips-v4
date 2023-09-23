@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.api.repairtips.domain.service.IcrudService;
+import com.api.repairtips.domain.service.interfaces.IcrudService;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;

@@ -3,7 +3,6 @@ package com.api.repairtips.domain.model.dto;
 import java.io.Serializable;
 import java.util.UUID;
 
-import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

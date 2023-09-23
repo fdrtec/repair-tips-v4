@@ -1,4 +1,4 @@
-package com.api.repairtips.domain.exception;
+package com.api.repairtips.domain.model.exception;
 
 public class BusinessException extends RuntimeException {
 

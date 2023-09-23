@@ -1,4 +1,4 @@
-package com.api.repairtips.domain.service;
+package com.api.repairtips.domain.service.interfaces;
 
 import java.util.UUID;
 

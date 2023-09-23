@@ -11,7 +11,7 @@ import com.api.repairtips.domain.repository.TypeRepository;
 import com.api.repairtips.domain.service.support.TypeService;
 
 @ExtendWith(MockitoExtension.class)
-public class TypeServiceTest {
+class TypeServiceTest {
 
     @Mock
     private TypeRepository repository;
