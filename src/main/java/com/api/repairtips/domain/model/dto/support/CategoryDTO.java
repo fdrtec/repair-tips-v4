@@ -1,5 +1,7 @@
 package com.api.repairtips.domain.model.dto.support;
 
+import java.util.List;
+
 import com.api.repairtips.domain.model.dto.BaseDTO;
 
 import jakarta.validation.constraints.NotBlank;
@@ -17,9 +19,8 @@ public class CategoryDTO extends BaseDTO {
 
     @NotBlank(message = "Name is required")
     private String name;
-
-    @NotNull(message = "Type is required")
-    private TypeDTO type;
+    
+    private List<TypeDTO> types;
 
     @NotNull
     private Boolean active;
