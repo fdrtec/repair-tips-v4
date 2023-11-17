@@ -1,10 +1,15 @@
 package com.api.repairtips.domain.model.entity;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -43,6 +48,16 @@ public class Type extends BaseEntity<Type> {
     // @JsonIgnore
     // @OneToMany(mappedBy = "type")
     // private List<Category> categories;
+
+    // v11.2 algaworks refinando payload = problema de atualizar objectos internos
+    // @JsonIgnoreProperties(value = "name", allowGetters = true)
+    // @JsonIgnore
+    @ManyToMany    
+    @JoinTable(
+        name = "tb_type_category", 
+        joinColumns = @JoinColumn(name = "type_id"),
+        inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private List<Category> categories;
 
     public int compareTo(Type other) {
         return name.compareTo(other.getName());

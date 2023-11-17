@@ -1,6 +1,8 @@
-CREATE TABLE rtdbv4.tb_category_type (
-	category_id BIGINT NOT NULL,
+CREATE TABLE rtdbv4.tb_type_category (
 	type_id BIGINT NOT NULL,    
+	category_id BIGINT NOT NULL,
+
+    PRIMARY KEY(type_id, category_id),
     
     CONSTRAINT category_type_fk
     FOREIGN KEY (category_id) REFERENCES rtdbv4.tb_category(id),

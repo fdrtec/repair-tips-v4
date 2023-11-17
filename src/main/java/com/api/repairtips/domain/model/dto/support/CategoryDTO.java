@@ -18,9 +18,7 @@ import lombok.NoArgsConstructor;
 public class CategoryDTO extends BaseDTO {    
 
     @NotBlank(message = "Name is required")
-    private String name;
-    
-    private List<TypeDTO> types;
+    private String name;    
 
     @NotNull
     private Boolean active;

@@ -39,18 +39,7 @@ public class Category implements Comparable<Category> {
     private Long id;
 
     @Column(name = "name")
-    private String name;
-
-    // v11.2 algaworks refinando payload = problema de atualizar objectos internos
-    // @JsonIgnoreProperties(value = "name", allowGetters = true)
-    // @JsonIgnore
-    @ManyToMany
-
-    @JoinTable(
-        name = "tb_category_type", 
-        joinColumns = @JoinColumn(name = "type_id"),
-        inverseJoinColumns = @JoinColumn(name = "category_id"))
-    private List<Type> type;
+    private String name;    
 
     @Column(name = "active")
     private Boolean active;

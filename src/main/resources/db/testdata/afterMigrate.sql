@@ -9,9 +9,9 @@ INSERT IGNORE INTO tb_category (id, name, active) VALUES (101, 'Laser', true);
 INSERT  IGNORE INTO tb_category (id, name, active) VALUES (102, 'Jato de tinta', true);
 INSERT IGNORE INTO tb_category (id, name, active) VALUES (103, 'Matricial', true);
 
-INSERT  IGNORE INTO tb_category_type(category_id, type_id) values (101, 1);
-INSERT  IGNORE INTO tb_category_type(category_id, type_id) values (102, 1);
-INSERT IGNORE INTO tb_category_type(category_id, type_id) values (103, 1);
+INSERT  IGNORE INTO tb_type_category(type_id, category_id) values (1, 101);
+INSERT  IGNORE INTO tb_type_category(type_id, category_id) values (1, 102);
+INSERT IGNORE INTO tb_type_category(type_id, category_id) values (1, 103);
 
 
 

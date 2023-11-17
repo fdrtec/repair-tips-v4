@@ -1,6 +1,9 @@
 package com.api.repairtips.domain.model.dto.support;
 
+import java.util.List;
+
 import com.api.repairtips.domain.model.dto.BaseDTO;
+import com.api.repairtips.domain.model.entity.Category;
 
 // import org.hibernate.validator.constraints.Range;
 
@@ -22,6 +25,8 @@ public class TypeDTO extends BaseDTO {
     @NotBlank(message = "name is required")
     @Size(max = 150)
     private String name;
+
+    private List<Category> categories;
 
     // @CPF
     // private String cpf;
