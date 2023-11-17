@@ -1,9 +1,8 @@
 CREATE TABLE rtdbv4.tb_category (
-	category_id BINARY(16) NOT NULL,
+	category_id BIGINT PRIMARY KEY AUTO_INCREMENT,
 	category_name VARCHAR(255) NOT NULL,
-	type_fk BINARY(16) NOT NULL,
-
-    PRIMARY KEY (category_id), 
+	type_fk BIGINT NOT NULL,
+    
     CONSTRAINT category_type_fk   
     FOREIGN KEY (type_fk) REFERENCES rtdbv4.tb_type (type_id)    
 )

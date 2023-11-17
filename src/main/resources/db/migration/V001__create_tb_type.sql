@@ -1,8 +1,8 @@
-CREATE TABLE rtdbv4.tb_type (
-	type_id BINARY(16) NOT NULL,
-	type_name VARCHAR(255) NOT NULL,
+-- CREATE DATABASE if not exists rtdbv4; 
 
-    PRIMARY KEY(type_id)
+CREATE TABLE rtdbv4.tb_type (
+	type_id BIGINT PRIMARY KEY AUTO_INCREMENT,
+	type_name VARCHAR(255) NOT NULL   
 )
 ENGINE=InnoDB
 DEFAULT CHARSET=utf8mb4

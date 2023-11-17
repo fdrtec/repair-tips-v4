@@ -1,7 +1,6 @@
 package com.api.repairtips.domain.service.support;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Example;
@@ -32,7 +31,7 @@ public class TypeService extends ModelAssembler<TypeDTO, Type> implements IcrudS
     }
 
     @Transactional
-    public TypeDTO findById(UUID id) {
+    public TypeDTO findById(Long id) {
         return this.toDTO(repository.findById(id).get());        
     }
 
@@ -49,7 +48,7 @@ public class TypeService extends ModelAssembler<TypeDTO, Type> implements IcrudS
     }
 
     @Transactional
-    public void delete(UUID id) {        
+    public void delete(Long id) {        
         repository.delete(repository.findById(id).get());        
         repository.flush();
     }

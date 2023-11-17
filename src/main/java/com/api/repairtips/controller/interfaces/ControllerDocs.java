@@ -1,7 +1,5 @@
 package com.api.repairtips.controller.interfaces;
 
-import java.util.UUID;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -28,7 +26,7 @@ public interface ControllerDocs<D> {
     @Operation(summary = "Get a data by its id")
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("{id}")
-    public D findById(@PathVariable @NotNull UUID id);
+    public D findById(@PathVariable @NotNull Long id);
 
     @Operation(summary = "Get data List by pagination")
     @GetMapping
@@ -37,7 +35,7 @@ public interface ControllerDocs<D> {
     @DeleteMapping("{id}")
     @Operation(summary = "Delete a data by its id")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteById(@PathVariable @Valid UUID id);
+    public void deleteById(@PathVariable @Valid Long id);
 
     @PutMapping
     @Operation(summary = "Update a data")    

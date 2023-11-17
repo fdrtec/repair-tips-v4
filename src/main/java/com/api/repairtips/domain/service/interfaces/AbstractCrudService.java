@@ -1,7 +1,5 @@
 package com.api.repairtips.domain.service.interfaces;
 
-import java.util.UUID;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,7 +12,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-abstract class AbstractCrudService<D, E, R extends JpaRepository<E, UUID>> extends ModelAssembler<D, E>
+abstract class AbstractCrudService<D, E, R extends JpaRepository<E, Long>> extends ModelAssembler<D, E>
         implements IcrudService<D> {
 
     protected final R repository;
@@ -32,13 +30,13 @@ abstract class AbstractCrudService<D, E, R extends JpaRepository<E, UUID>> exten
     }
 
     @Override
-    public void delete(UUID id) {
+    public void delete(Long id) {
         // TODO Auto-generated method stub
         
     }
 
     @Override
-    public D findById(UUID id) {
+    public D findById(Long id) {
         // TODO Auto-generated method stub
         return null;
     }

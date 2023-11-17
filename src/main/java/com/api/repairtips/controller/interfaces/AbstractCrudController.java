@@ -1,7 +1,5 @@
 package com.api.repairtips.controller.interfaces;
 
-import java.util.UUID;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,7 +23,7 @@ public abstract class AbstractCrudController<D, S extends IcrudService<D>> imple
     }
     
     @Override
-    public D findById(@PathVariable @NotNull @Positive UUID id){
+    public D findById(@PathVariable @NotNull @Positive Long id){
         return service.findById(id);
     }
     
@@ -35,7 +33,7 @@ public abstract class AbstractCrudController<D, S extends IcrudService<D>> imple
     }
 
     @Override
-    public void deleteById(@PathVariable @NotNull UUID id) {
+    public void deleteById(@PathVariable @NotNull Long id) {
         service.delete(id);
     }
     

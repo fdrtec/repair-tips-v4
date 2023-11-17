@@ -1,7 +1,5 @@
 package com.api.repairtips.domain.model.entity;
 
-import java.util.UUID;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -33,8 +31,8 @@ public class Category implements Comparable<Category> {
 
     @Id
     @Column(name = "category_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.AUTO)    
+    private Long id;
 
     @Column(name = "category_name")
     private String name;

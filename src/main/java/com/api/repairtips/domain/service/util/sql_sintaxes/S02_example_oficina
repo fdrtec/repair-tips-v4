@@ -1,0 +1,59 @@
+CREATE DATABASE oficina;
+
+USE oficina;
+
+CREATE TABLE cliente(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(150) NOT NULL,
+    sexo ENUM('M', 'F') NOT NULL   
+);
+
+CREATE TABLE telefone(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    tipo ENUM('CEL', 'RES', 'COM') NOT NULL,
+    numero VARCHAR(30) NOT NULL,
+    cliente_id INT
+);
+
+CREATE TABLE marca(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    marca VARCHAR(50) UNIQUE
+);
+
+CREATE TABLE carro(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    modelo VARCHAR(30) NOT NULL,
+    placa VARCHAR(30) NOT NULL UNIQUE,
+    marca_id INT NOT NULL,
+    cliente_id INT NOT NULL UNIQUE
+);
+
+CREATE TABLE cor(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    cor VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE carro_cor(
+    carro_id INT,
+    cor_id INT,
+    PRIMARY KEY(carro_id, cor_id)
+);
+
+-- CONSTRAINTS
+ALTER TABLE telefone
+ADD CONSTRAINT fk_telefone_cliente 
+FOREIGN KEY(cliente_id) 
+REFERENCES cliente(id);
+
+-- Na tabela associativa carro_cor (N x N) criamos 2 FK direto nas tabelas das pontas
+ALTER TABLE carro_cor
+ADD CONSTRAINT fk_carro_cor,
+ADD FOREIGN KEY(cor_id) 
+REFERENCES cor(id);
+
+ALTER TABLE carro_cor
+ADD CONSTRAINT fk_cor_carro,
+ADD FOREIGN KEY(carro_id) 
+REFERENCES carro(id);
+
+

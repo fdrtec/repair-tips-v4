@@ -1,17 +1,16 @@
 package com.api.repairtips.domain.repository;
 
 import java.util.Optional;
-import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.api.repairtips.domain.model.entity.Type;
 
 
-public interface TypeRepository extends JpaRepository<Type, UUID> {
+public interface TypeRepository extends JpaRepository<Type, Long> {
     Optional<Type> findByName(String name);
 
-    // List<Type> findByNameLikeOrIdOrderById(String name, UUID id);
+    // List<Type> findByNameLikeOrIdOrderById(String name, Long id);
 
     // //Lança exception se existir mais de um
     // Type findOneTypeByName( String name);
@@ -27,7 +26,7 @@ public interface TypeRepository extends JpaRepository<Type, UUID> {
 
     //fetch traz com type com ou sem itens
     // @Query("select t from type t left join fetch type.itens where t.id=:id")
-    // Type findTypeFetchItens(@Param("id") UUID id);
+    // Type findTypeFetchItens(@Param("id") Long id);
     
     //Dono é mock só para ilustrar o pertencimento
     // List<Types> findByDono(Dono dono);

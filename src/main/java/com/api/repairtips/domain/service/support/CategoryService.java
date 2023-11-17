@@ -1,7 +1,5 @@
 package com.api.repairtips.domain.service.support;
 
-import java.util.UUID;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -25,7 +23,7 @@ public class CategoryService extends ModelAssembler<CategoryDTO, Category> imple
     }
 
     @Override
-    public CategoryDTO findById(UUID id) {
+    public CategoryDTO findById(Long id) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'findById'");
     }
@@ -43,7 +41,7 @@ public class CategoryService extends ModelAssembler<CategoryDTO, Category> imple
     }
 
     @Override
-    public void delete(UUID id) {
+    public void delete(Long id) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'delete'");
     }

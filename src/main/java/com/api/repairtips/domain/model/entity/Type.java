@@ -1,7 +1,5 @@
 package com.api.repairtips.domain.model.entity;
 
-import java.util.UUID;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,8 +29,8 @@ public class Type extends BaseEntity<Type> {
 
     @Id
     @Column(name = "type_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)    
-    private UUID id;  
+    @GeneratedValue(strategy = GenerationType.AUTO)        
+    private Long id;  
 
     @Column(name = "type_name", nullable = false, unique = true)
     private String name;
