@@ -24,27 +24,27 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(of = {"name", "type"}, callSuper = false)
+@EqualsAndHashCode(of = {"id"}, callSuper = false)
 @Table(name = "tb_category")
 @Entity
 public class Category implements Comparable<Category> {
 
     @Id
-    @Column(name = "category_id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)    
     private Long id;
 
-    @Column(name = "category_name")
+    @Column(name = "name")
     private String name;
 
     //v11.2 algaworks refinando payload = problema de atualizar objectos internos
     // @JsonIgnoreProperties(value = "name", allowGetters = true)
     // @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "category_type_fk", referencedColumnName="type_id")
+    @JoinColumn(name = "type_id", referencedColumnName = "id")
     private Type type;
 
-    @Column(name = "category_active")
+    @Column(name = "active")
     private Boolean active;
     
     @Override

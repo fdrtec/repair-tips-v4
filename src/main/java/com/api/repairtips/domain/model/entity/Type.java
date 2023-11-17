@@ -28,11 +28,11 @@ import lombok.NoArgsConstructor;
 public class Type extends BaseEntity<Type> {
 
     @Id
-    @Column(name = "type_id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)        
     private Long id;  
 
-    @Column(name = "type_name", nullable = false, unique = true)
+    @Column(name = "name", nullable = false, unique = true)
     private String name;
 
     

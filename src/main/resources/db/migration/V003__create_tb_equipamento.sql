@@ -4,7 +4,7 @@ CREATE TABLE rtdbv4.tb_equipamento (
     type_id  BIGINT NOT NULL,
     category_id BIGINT NOT NULL
     
-    -- CONSTRAINT category_type_fk   
+    -- CONSTRAINT category_type
     -- FOREIGN KEY (type_fk) REFERENCES rtdbv4.tb_type (type_id)    
 )
 ENGINE=InnoDB
