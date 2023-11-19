@@ -10,6 +10,7 @@ import com.api.repairtips.domain.model.entity.Category;
 import com.api.repairtips.domain.repository.CategoryRepository;
 import com.api.repairtips.domain.service.interfaces.IcrudService;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -18,6 +19,7 @@ public class CategoryService extends ModelAssembler<CategoryDTO, Category> imple
 
     private final CategoryRepository repository;
 
+    @Transactional 
     public Page<CategoryDTO> findAll(Pageable pageable) {
         return this.toCollectionDTO(repository.findAll(pageable), pageable);
     }

@@ -25,12 +25,12 @@ public class TypeService extends ModelAssembler<TypeDTO, Type> implements IcrudS
 
     private final TypeRepository repository;
 
-    @Transactional(readOnly = true)
+    @Transactional
     public Page<TypeDTO> findAll(Pageable pageable) {        
         return this.toCollectionDTO(repository.findAll(pageable), pageable);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public TypeDTO findById(Long id) {
         return this.toDTO(repository.findById(id).get());        
     }
