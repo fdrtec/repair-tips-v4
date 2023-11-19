@@ -1,6 +1,4 @@
--- CREATE DATABASE if not exists rtdbv4; 
-
-CREATE TABLE rtdbv4.tb_type (
+CREATE TABLE rtdb.tb_type (
 	id BIGINT PRIMARY KEY AUTO_INCREMENT,
 	name VARCHAR(255) NOT NULL   
 )

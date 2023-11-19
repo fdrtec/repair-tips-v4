@@ -1,4 +1,4 @@
-CREATE TABLE rtdbv4.tb_category (
+CREATE TABLE rtdb.tb_category (
 	id BIGINT PRIMARY KEY AUTO_INCREMENT,
 	name VARCHAR(255) NOT NULL,	
     active TINYINT(1) NOT NULL    
