@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.api.repairtips.domain.model.dto.BaseDTO;
 import com.api.repairtips.domain.model.entity.Category;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 // import org.hibernate.validator.constraints.Range;
 
@@ -26,6 +27,7 @@ public class TypeDTO extends BaseDTO {
     @Size(max = 150)
     private String name;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<Category> categories;
 
     // @CPF
