@@ -30,4 +30,11 @@ public interface TypeRepository extends JpaRepository<Type, Long> {
     
     //Dono é mock só para ilustrar o pertencimento
     // List<Types> findByDono(Dono dono);
+
+    // Exemplos de prefixos de query parameters
+    // consultar mais em 5.8. Conhecendo os prefixos de query methods(algaworks) - 11:43
+    // https://docs.spring.io/spring-data/jpa/reference/jpa/query-methods.html
+    // List<Type> types queryByTaxaFreteBetween(BigDecimal taxaInicial, BigDecimal taxaFinal);
+    //
+    
 }

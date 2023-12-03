@@ -3,6 +3,7 @@ package com.api.repairtips.controller.interfaces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -16,7 +17,7 @@ public abstract class AbstractCrudController<D, S extends IcrudService<D>> imple
     
     @Autowired
     private S service;
-
+    
     @Override
     public Page<D> findAll(Pageable pageable) {
         return service.findAll(pageable);
