@@ -1,4 +1,4 @@
-package com.api.repairtips.controller;
+package com.api.repairtips.web.controller;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.NOT_FOUND;

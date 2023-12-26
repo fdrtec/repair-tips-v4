@@ -1,4 +1,4 @@
-package com.api.repairtips.controller.interfaces;
+package com.api.repairtips.web.controller.interfaces;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

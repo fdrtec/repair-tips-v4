@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.api.repairtips.domain.model.assembler.ModelAssembler;
-import com.api.repairtips.domain.model.dto.support.TypeDTO;
 import com.api.repairtips.domain.model.entity.Type;
 import com.api.repairtips.domain.repository.TypeRepository;
 import com.api.repairtips.domain.service.interfaces.IcrudService;
+import com.api.repairtips.web.dto.support.TypeDTO;
 
 import jakarta.persistence.EntityExistsException;
 import lombok.RequiredArgsConstructor;

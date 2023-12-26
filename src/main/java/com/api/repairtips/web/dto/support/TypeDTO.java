@@ -1,9 +1,9 @@
-package com.api.repairtips.domain.model.dto.support;
+package com.api.repairtips.web.dto.support;
 
 import java.util.List;
 
-import com.api.repairtips.domain.model.dto.BaseDTO;
 import com.api.repairtips.domain.model.entity.Category;
+import com.api.repairtips.web.dto.BaseDTO;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 // import org.hibernate.validator.constraints.Range;

@@ -1,8 +1,8 @@
-package com.api.repairtips.domain.model.dto.support;
+package com.api.repairtips.web.dto.support;
 
 import java.util.List;
 
-import com.api.repairtips.domain.model.dto.BaseDTO;
+import com.api.repairtips.web.dto.BaseDTO;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
