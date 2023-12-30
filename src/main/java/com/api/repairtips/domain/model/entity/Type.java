@@ -14,6 +14,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 /*
 * 
@@ -47,6 +48,7 @@ public class Type extends BaseEntity<Type> {
     // @JsonIgnoreProperties(value = "name", allowGetters = true)
     // @JsonIgnore
     /* Não precisa declarar carregamento Lazy porque já default */
+    
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "tb_type_category", joinColumns = @JoinColumn(name = "type_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
     private List<Category> categories;
@@ -54,6 +56,13 @@ public class Type extends BaseEntity<Type> {
     public int compareTo(Type other) {
         return name.compareTo(other.getName());
     }
+
+    @Override
+    public String toString() {
+        return "Type [name=" + name + "]";
+    }
+
+    
 
     // @Column(nullable = true, columnDefinition = "TIMESTAMP")
     // private LocalDateTime exampleDateColumnDefinition;

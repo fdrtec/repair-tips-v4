@@ -7,8 +7,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
+import lombok.Getter;
 
 @MappedSuperclass
+@Getter
 public abstract class BaseEntity<T> implements Serializable, Comparable<T> {
 
     private static final long serialVersionUID = 1L;

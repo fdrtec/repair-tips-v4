@@ -27,8 +27,8 @@ public class TypeDTO extends BaseDTO {
     @Size(max = 150)
     private String name;
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    private List<Category> categories;
+    // @JsonInclude(JsonInclude.Include.NON_NULL)
+    // private List<Category> categories;
 
     // @CPF
     // private String cpf;
