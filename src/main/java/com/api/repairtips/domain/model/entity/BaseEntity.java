@@ -36,4 +36,25 @@ public abstract class BaseEntity<T> implements Serializable, Comparable<T> {
     public int hashCode() {
         return getClass().hashCode();
     }
+
+
+    /*
+     // @Column(nullable = true, columnDefinition = "TIMESTAMP")
+    // private LocalDateTime exampleDateColumnDefinition;
+
+    // @Enumerated(EnumType.STRING)
+    // @Column(nullable = false, length = 20 )
+    // private Gender gender;
+
+    // @Column(name = "total", precision = 20, scale = 2)
+    // private BigDecimal total;
+
+    // @OneToMany(mappedBy = "entidade onde fica o ManyToOne")
+    // private List<Item> itens;
+
+    // Não precisa declarar carregamento Eager porque já default
+    // @ManyToOne (cascade = { CascadeType.MERGE })
+    // @JoinColumn(name = "entidade_id da descrição abaixo")
+    // private Entidade entidade;
+     */
 }

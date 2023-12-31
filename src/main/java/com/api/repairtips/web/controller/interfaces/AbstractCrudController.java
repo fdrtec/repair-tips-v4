@@ -3,7 +3,6 @@ package com.api.repairtips.web.controller.interfaces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -15,6 +14,7 @@ import jakarta.validation.constraints.Positive;
 
 public abstract class AbstractCrudController<D, S extends IcrudService<D>> implements ControllerDocs<D> {
     
+    @java.lang.SuppressWarnings("java:S6813")
     @Autowired
     protected S service;
     
