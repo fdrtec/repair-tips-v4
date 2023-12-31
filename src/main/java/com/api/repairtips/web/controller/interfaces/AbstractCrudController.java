@@ -16,7 +16,7 @@ import jakarta.validation.constraints.Positive;
 public abstract class AbstractCrudController<D, S extends IcrudService<D>> implements ControllerDocs<D> {
     
     @Autowired
-    private S service;
+    protected S service;
     
     @Override
     public Page<D> findAll(Pageable pageable) {

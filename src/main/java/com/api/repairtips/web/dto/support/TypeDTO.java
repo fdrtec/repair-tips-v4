@@ -25,24 +25,6 @@ public class TypeDTO extends BaseDTO {
 
     @NotBlank(message = "name is required")
     @Size(max = 150)
-    private String name;
+    private String name;    
 
-    // @JsonInclude(JsonInclude.Include.NON_NULL)
-    // private List<Category> categories;
-
-    // @CPF
-    // private String cpf;
-
-    // @Range(min = 10, max = 20)
-    // private Integer limite;
-
-    // private LocalDateTime createdDate;
-
-    // @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
-    // private LocalDateTime lastModifiedDate;
-
-    // @NotEmpty
-    // @DecimalMin("0")
-    // @PositiveOrZero
-    // private BigDecimal taxaFrete;
 }
