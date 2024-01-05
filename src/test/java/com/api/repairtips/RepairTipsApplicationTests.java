@@ -10,7 +10,10 @@ class RepairTipsApplicationTests {
 
 	@Test
 	void contextLoads() {
-		assertEquals(1, 1);
+		var expected = "resultado ok";
+		var resulted = "resultado ok";
+		
+		assertEquals(expected, resulted);
 	}
 
 }

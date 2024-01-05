@@ -1,4 +1,4 @@
-package com.api.repairtips.domain.service;
+package com.api.repairtips.domain.service.support;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -8,7 +8,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.api.repairtips.domain.repository.TypeRepository;
-import com.api.repairtips.domain.service.support.TypeService;
 
 @ExtendWith(MockitoExtension.class)
 class TypeServiceTest {
