@@ -10,7 +10,10 @@ CREATE TABLE rtdb.tb_equipment (
     FOREIGN KEY (category_id) REFERENCES rtdb.tb_category(id),
 
     CONSTRAINT equipament_type_fk
-    FOREIGN KEY (type_id) REFERENCES rtdb.tb_type(id)    
+    FOREIGN KEY (type_id) REFERENCES rtdb.tb_type(id),
+
+    CONSTRAINT equipament_manufacturer_fk
+    FOREIGN KEY (manufacturer_id) REFERENCES rtdb.tb_manufacturer(id)    
 )
 ENGINE=InnoDB
 DEFAULT CHARSET=utf8mb4

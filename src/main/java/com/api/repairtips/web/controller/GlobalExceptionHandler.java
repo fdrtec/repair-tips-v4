@@ -15,6 +15,10 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import lombok.extern.log4j.Log4j2;
 
+//INFO: Referencia de estudo(ExceptionHandler)
+//Revisar error array
+//aula 54 https://www.udemy.com/course/spring-boot-expert/learn/lecture/18172114#overview
+
 @Log4j2
 @RestControllerAdvice
 public class GlobalExceptionHandler {
