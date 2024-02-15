@@ -10,7 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.api.repairtips.domain.model.assembler.ModelAssembler;
+import com.api.repairtips.domain.model.conversor.ModelConversor;
 import com.api.repairtips.domain.model.entity.Type;
 import com.api.repairtips.domain.repository.TypeRepository;
 import com.api.repairtips.domain.service.interfaces.IcrudService;
@@ -22,19 +22,19 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class TypeService extends ModelAssembler<TypeDTO, Type> implements IcrudService<TypeDTO> {
+public class TypeService implements IcrudService<TypeDTO>, ModelConversor<TypeDTO, Type> {
 
     private final TypeRepository repository;
     private final TypeWithEmbeddedListService embeddedListService;
-
+    
     @Transactional(readOnly = true)
     public Page<TypeDTO> findAll(Pageable pageable) {
-        return this.toCollectionDTO(repository.findAll(pageable), pageable);
+        return toCollectionDTO(repository.findAll(pageable), pageable);
     }
 
     @Transactional(readOnly = true)
     public TypeDTO findById(Long id) {
-        return this.toDTO(repository.findById(id).get());
+        return toDTO(repository.findById(id).get());
     }
 
     @Transactional(readOnly = true)
@@ -45,7 +45,7 @@ public class TypeService extends ModelAssembler<TypeDTO, Type> implements IcrudS
     @Transactional
     public TypeDTO create(TypeDTO dto) {
         hasConflict(dto);
-        return this.toDTO(repository.saveAndFlush(this.toEntity(dto)));
+        return toDTO(repository.saveAndFlush(toEntity(dto)));
     }
 
     private void hasConflict(TypeDTO dto) {
@@ -63,8 +63,8 @@ public class TypeService extends ModelAssembler<TypeDTO, Type> implements IcrudS
     @Transactional
     public TypeDTO update(TypeDTO dto) {
         Type type = repository.findById(dto.getId()).get();
-        BeanUtils.copyProperties(this.toEntity(dto), type, "id");
-        return this.toDTO(repository.saveAndFlush(type));
+        BeanUtils.copyProperties(toEntity(dto), type, "id");
+        return toDTO(repository.saveAndFlush(type));
     }
 
     // alternativa para filtro com example, isso seria via parametros via get :(

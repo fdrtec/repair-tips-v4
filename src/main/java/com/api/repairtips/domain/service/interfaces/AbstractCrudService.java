@@ -6,13 +6,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.api.repairtips.domain.model.assembler.ModelAssembler;
+import com.api.repairtips.domain.model.conversor.ModelConversor;
 
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-abstract class AbstractCrudService<D, E, R extends JpaRepository<E, Long>> extends ModelAssembler<D, E>
+abstract class AbstractCrudService<D, E, R extends JpaRepository<E, Long>> extends ModelConversor<D, E>
         implements IcrudService<D> {
 
     protected final R repository;

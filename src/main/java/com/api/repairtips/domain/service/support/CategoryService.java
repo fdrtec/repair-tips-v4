@@ -1,10 +1,13 @@
 package com.api.repairtips.domain.service.support;
 
+import java.util.Objects;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.api.repairtips.domain.model.assembler.ModelAssembler;
+import com.api.repairtips.domain.model.conversor.ModelConversor;
 import com.api.repairtips.domain.model.entity.Category;
 import com.api.repairtips.domain.repository.CategoryRepository;
 import com.api.repairtips.domain.service.interfaces.IcrudService;
@@ -15,13 +18,18 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class CategoryService extends ModelAssembler<CategoryDTO, Category> implements IcrudService<CategoryDTO> {
+public class CategoryService implements IcrudService<CategoryDTO>, ModelConversor<CategoryDTO, Category> {
 
-    private final CategoryRepository repository;
+    private final CategoryRepository repository;     
 
     @Transactional 
     public Page<CategoryDTO> findAll(Pageable pageable) {
-        return this.toCollectionDTO(repository.findAll(pageable), pageable);
+        
+        if(Objects.nonNull(pageable)){
+            Page<Category> result = repository.findAll(pageable);
+            return this.toCollectionDTO(result, pageable);
+        }
+        throw new  IllegalArgumentException("Parâmetro inválido!");
     }
 
     @Override
