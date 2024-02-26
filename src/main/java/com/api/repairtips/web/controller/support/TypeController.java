@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.api.repairtips.domain.model.dto.support.TypeDTO;
+import com.api.repairtips.domain.model.dto.support.TypeWithEmbeddedListsDTO;
 import com.api.repairtips.domain.service.support.TypeService;
 import com.api.repairtips.web.controller.interfaces.AbstractCrudController;
-import com.api.repairtips.web.dto.support.TypeDTO;
-import com.api.repairtips.web.dto.support.TypeWithEmbeddedListsDTO;
 
 
 @RestController

@@ -1,6 +1,8 @@
 package com.api.repairtips.domain.service.support;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Example;
@@ -11,11 +13,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.api.repairtips.domain.model.conversor.ModelConversor;
+import com.api.repairtips.domain.model.dto.support.TypeDTO;
+import com.api.repairtips.domain.model.dto.support.TypeWithEmbeddedListsDTO;
 import com.api.repairtips.domain.model.entity.Type;
 import com.api.repairtips.domain.repository.TypeRepository;
 import com.api.repairtips.domain.service.interfaces.IcrudService;
-import com.api.repairtips.web.dto.support.TypeDTO;
-import com.api.repairtips.web.dto.support.TypeWithEmbeddedListsDTO;
 
 import jakarta.persistence.EntityExistsException;
 import lombok.RequiredArgsConstructor;
@@ -23,23 +25,29 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class TypeService implements IcrudService<TypeDTO>, ModelConversor<TypeDTO, Type> {
-
+    
     private final TypeRepository repository;
     private final TypeWithEmbeddedListService embeddedListService;
-    
-    @Transactional(readOnly = true)
-    public Page<TypeDTO> findAll(Pageable pageable) {
-        return toCollectionDTO(repository.findAll(pageable), pageable);
-    }
 
     @Transactional(readOnly = true)
+    public Page<TypeDTO> findAll(Pageable pageable) {
+
+        if (Objects.nonNull(pageable)) {
+            Page<Type> all = repository.findAll(pageable);
+            return toCollectionDTO(all);
+        }
+        throw new IllegalArgumentException("Parâmetro inválido!");
+    }
+
+    // @Transactional(readOnly = true)
     public TypeDTO findById(Long id) {
-        return toDTO(repository.findById(id).get());
+        Optional<Type> entity = repository.findById(id);
+        return toDTO(entity.get());
     }
 
     @Transactional(readOnly = true)
     public Page<TypeWithEmbeddedListsDTO> findAllWithEmbeddedLists(Pageable pageable) {
-        return this.embeddedListService.toCollectionDTO(repository.findAll(pageable), pageable);
+        return this.embeddedListService.toCollectionDTO(repository.findAll(pageable));
     }
 
     @Transactional

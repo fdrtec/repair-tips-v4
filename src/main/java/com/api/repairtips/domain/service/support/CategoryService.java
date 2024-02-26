@@ -8,10 +8,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.api.repairtips.domain.model.conversor.ModelConversor;
+import com.api.repairtips.domain.model.dto.support.CategoryDTO;
 import com.api.repairtips.domain.model.entity.Category;
 import com.api.repairtips.domain.repository.CategoryRepository;
 import com.api.repairtips.domain.service.interfaces.IcrudService;
-import com.api.repairtips.web.dto.support.CategoryDTO;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -20,16 +20,16 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CategoryService implements IcrudService<CategoryDTO>, ModelConversor<CategoryDTO, Category> {
 
-    private final CategoryRepository repository;     
+    private final CategoryRepository repository;
 
-    @Transactional 
+    @Transactional
     public Page<CategoryDTO> findAll(Pageable pageable) {
-        
-        if(Objects.nonNull(pageable)){
-            Page<Category> result = repository.findAll(pageable);
-            return this.toCollectionDTO(result, pageable);
+
+        if (Objects.nonNull(pageable)) {
+            Page<Category> page = repository.findAll(pageable);
+            return toCollectionDTO(page);
         }
-        throw new  IllegalArgumentException("Parâmetro inválido!");
+        throw new IllegalArgumentException("Parâmetro inválido!");
     }
 
     @Override
@@ -55,5 +55,5 @@ public class CategoryService implements IcrudService<CategoryDTO>, ModelConverso
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'delete'");
     }
-    
+
 }

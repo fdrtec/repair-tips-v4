@@ -12,15 +12,14 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-abstract class AbstractCrudService<D, E, R extends JpaRepository<E, Long>> extends ModelConversor<D, E>
-        implements IcrudService<D> {
+abstract class AbstractCrudService<D, E, R extends JpaRepository<E, Long>> implements ModelConversor<D, E>, IcrudService<D> {
 
     protected final R repository;
 
     @Override
     @Transactional(readOnly = true)
     public Page<D> findAll(Pageable pageable) {
-        return this.toCollectionDTO(repository.findAll(pageable), pageable);
+        return this.toCollectionDTO(repository.findAll(pageable));
     }    
 
     @Override

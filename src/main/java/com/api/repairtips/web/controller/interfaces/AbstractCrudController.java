@@ -10,7 +10,6 @@ import com.api.repairtips.domain.service.interfaces.IcrudService;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
 
 public abstract class AbstractCrudController<D, S extends IcrudService<D>> implements ControllerDocs<D> {
     
@@ -24,7 +23,7 @@ public abstract class AbstractCrudController<D, S extends IcrudService<D>> imple
     }
     
     @Override
-    public D findById(@PathVariable @NotNull @Positive Long id){
+    public D findById(@PathVariable @NotNull Long id){
         return service.findById(id);
     }
     

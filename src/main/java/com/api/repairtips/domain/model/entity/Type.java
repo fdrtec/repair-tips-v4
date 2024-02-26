@@ -27,10 +27,10 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper=false)
 @Table(name = "tb_type")
 @Entity
-public class Type extends BaseEntity<Type> {
+public class Type extends AbstractEntity {
 
     @Column(name = "name", nullable = false, unique = true)
     private String name;    

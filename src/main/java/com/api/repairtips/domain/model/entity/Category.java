@@ -21,10 +21,10 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper=false)
 @Table(name = "tb_category")
 @Entity
-public class Category extends BaseEntity<Category> {
+public class Category extends AbstractEntity {
 
     @Column(name = "name")
     private String name;
@@ -32,9 +32,9 @@ public class Category extends BaseEntity<Category> {
     @Column(name = "active")
     private Boolean active;
 
-    @Override
-    public int compareTo(Category other) {
-        return name.compareTo(other.getName());
-    }
+    // @Override
+    // public int compareTo(Category other) {
+    //     return name.compareTo(other.getName());
+    // }
 
 }

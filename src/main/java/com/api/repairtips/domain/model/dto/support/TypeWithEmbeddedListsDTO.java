@@ -1,4 +1,4 @@
-package com.api.repairtips.web.dto.support;
+package com.api.repairtips.domain.model.dto.support;
 
 import java.util.ArrayList;
 import java.util.List;

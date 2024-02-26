@@ -1,4 +1,4 @@
-package com.api.repairtips.web.dto;
+package com.api.repairtips.domain.model.dto;
 
 import java.io.Serializable;
 
