@@ -1,0 +1,15 @@
+services:
+  repair_tips_db:
+    image: mysql/mysql-server:8.0
+    container_name: repair_tips_db
+    restart: always
+    environment:
+      - MYSQL_DATABASE=rtdb
+      - MYSQL_ROOT_PASSWORD=123456
+    ports:
+      - '3306:3306'
+    volumes:
+      - mysql-volume:/var/lib/mysql
+volumes:
+  mysql-volume:
+    driver: local
