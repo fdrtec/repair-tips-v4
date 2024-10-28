@@ -3,7 +3,12 @@ EXPOSE 8081
 ADD target/repair-tips-0.0.1-SNAPSHOT.jar repair-tips-app.jar
 ENTRYPOINT [ "java", "-jar", "repair-tips-app.jar" ]
 
-# docker build . -t repair-tips-app:0.0.1
+#colocar os conteiners na mesma rede
+#docker network create repair-tips-network
+
+# docker build . -t repair-tips-app:0.0.1-t2
+#docker run -d --name repair-tips-container --network bridge repair-tips-app:0.0.1-t2
+
 # docker run -p 8081:8081 repair-tips-app:0.0.1
 
 
