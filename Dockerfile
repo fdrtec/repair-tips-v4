@@ -1,30 +1,25 @@
-FROM openjdk:20
-EXPOSE 8081
-ADD target/repair-tips-0.0.1-SNAPSHOT.jar repair-tips-app.jar
-ENTRYPOINT [ "java", "-jar", "repair-tips-app.jar" ]
+FROM maven:3.9.6 AS builder
+WORKDIR /build
+COPY . .
+RUN mvn clean package
 
-#colocar os conteiners na mesma rede
+FROM openjdk:17-jdk-slim
+WORKDIR /app
+COPY --from=builder ./build/target/*.jar app.jar
+EXPOSE 8081
+ENTRYPOINT ["java", "-jar", "app.jar"]
+
+#criar uma rede para os containers
 #docker network create repair-tips-network
 
-# docker build . -t repair-tips-app:0.0.1-t2
-#docker run -d --name repair-tips-container --network bridge repair-tips-app:0.0.1-t2
-
-# docker run -p 8081:8081 repair-tips-app:0.0.1
-
-
-# FROM maven:3.9.6 AS build
-# WORKDIR /build
-# COPY . .
-# RUN mvn clean install
-
-# FROM openjdk:20
-# WORKDIR /image
-# COPY --from=build ./build/target/*.jar ./artefact.jar
-# EXPOSE 8081
-# ENTRYPOINT java -jar artefact.jar
-
 # no terminal para criar imagem, predomina a última imagem recriada
-# docker build -t fdrtec/repair-tips/api .
+# docker build . -t fdrtec/repair-tips-api:v4 --no-cache
+
+#ver os problema do container
+#docker logs repair-tips-container
+
+# ver imagem fdrtec/repair-tips-api
+# docker image ls
 
 # no terminal para rodar container
-# docker run -dti -p 8081:8081 --name repair-tips-container --net bridge repair-tips/api
+# docker run -dti -p 8081:8081 --name repair-tips-container --net bridge fdrtec/repair-tips-api
